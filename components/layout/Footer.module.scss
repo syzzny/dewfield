@@ -106,6 +106,10 @@
   color: c(olive);
   text-align: center;
   white-space: nowrap;
+  // 390px보다 좁은 화면에서는 폭에 맞춰 줄여 좌우가 잘리지 않게 (글자 폭 ≈ 2.7em)
+  @include down($bp-sm) {
+    font-size: min(128px, calc((100vw - 40px) / 2.7));
+  }
   // 아래가 살짝 잘리도록
   margin-bottom: -0.12em;
 }

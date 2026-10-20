@@ -19,7 +19,7 @@ export default function Ritual() {
       <IndexRow left="(05)  The ritual" right="Dewfield — 05 / 07" mobileRight="05 / 07" />
       <div className={styles.body}>
         <div className={styles.visual}>
-          <Img src={images.stones} sat={-0.3} className={styles.img} parallax={0.1} />
+          <Img src={images.stones} sat={-0.3} className={styles.img} reveal="fade" />
           <p className={styles.caption}>
             Morning
             <br />& Night

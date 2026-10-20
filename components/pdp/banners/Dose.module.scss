@@ -48,9 +48,11 @@
   color: c(sage);
   opacity: 0.95;
 
+  // 모바일: 숫자 전체가 보이도록 바닥에 맞춰요
   @include down($bp-md) {
     left: 8px;
-    bottom: -60px;
+    bottom: 0;
+    font-size: min(340px, 80vw);
   }
 }
 
@@ -82,6 +84,12 @@
 .body {
   @include kr(13, 16, 300, 1.8);
   white-space: pre-line;
+
+  // 모바일은 글 칸이 좁아 강제 줄바꿈이 어색하게 끊겨요 — 자연스럽게 흐르게
+  @include down($bp-md) {
+    white-space: normal;
+    word-break: keep-all;
+  }
 }
 
 .drops {

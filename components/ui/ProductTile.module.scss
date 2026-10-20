@@ -42,6 +42,13 @@
   padding: 5px 10px;
   background: c(cream);
   font-size: 9px;
+
+  // 좁은 2열 타일에서는 번호(NO. 01)와 겹치지 않게 번호 아래로 내려요
+  @include down($bp-sm) {
+    top: 38px;
+    left: 16px;
+    right: auto;
+  }
 }
 
 .size {

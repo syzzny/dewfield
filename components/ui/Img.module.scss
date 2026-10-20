@@ -14,3 +14,13 @@
   @include cover;
   object-fit: cover;
 }
+
+// 로딩이 끝나면 부드럽게 나타나요 (JS가 준비된 경우에만 숨김)
+:global(.motion-ready) .frame img {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+:global(.motion-ready) .frame[data-loaded] img {
+  opacity: 1;
+}

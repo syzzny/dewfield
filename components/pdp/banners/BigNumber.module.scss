@@ -124,6 +124,13 @@
   letter-spacing: -0.08em;
   opacity: 0.95;
 
+  // 모바일: 화면 폭에 맞춰 크기를 줄이고, 숫자가 아래로 잘리지 않게 올려요
+  @include down($bp-md) {
+    left: 12px;
+    bottom: 8px;
+    font-size: min(340px, 82vw);
+  }
+
   em {
     font-size: 0.333em;
     font-style: italic;

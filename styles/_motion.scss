@@ -6,8 +6,8 @@
 // 문법은 네 가지로 제한해요: up · lines(제목) · image · line(hairline)
 // =============================================================
 
-$dur: 1.1s;
-$slow: 1.6s;
+$dur: 1s;
+$slow: 1.3s;
 $motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
 
 :root {
@@ -57,19 +57,37 @@ $motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
   display: block;
 }
 
-// ---------- image: 사진이 위에서 아래로 열리며 가라앉기 ----------
-// clip-path는 안쪽 <img>에 줘요. 관찰 대상(프레임)에 주면 IntersectionObserver가 '안 보임'으로 판단해요.
-.motion-ready [data-reveal='image'] img {
-  clip-path: inset(0 0 100% 0);
-  transform: scale(1.1);
-  transition:
-    clip-path $slow $motion-ease var(--reveal-delay),
-    transform 2.2s $motion-ease var(--reveal-delay);
-}
+// ---------- image: 베이지 커튼이 아래로 걷히며 사진이 천천히 가라앉기 ----------
+// 성능: transform · opacity만 움직여요(GPU 합성). clip-path는 매 프레임 다시 그려서 끊겨 보였어요.
+// 화면에 들어왔고(.is-in) 파일도 다 받았을 때([data-loaded])만 시작해요.
+.motion-ready [data-reveal='image'] {
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--paper-2);
+    transform-origin: bottom;
+    transition: transform $dur $motion-ease var(--reveal-delay);
+    pointer-events: none;
+  }
 
-.motion-ready [data-reveal='image'].is-in img {
-  clip-path: inset(0 0 0 0);
-  transform: scale(1);
+  img {
+    transform: scale(1.08);
+    transition:
+      opacity 0.5s ease var(--reveal-delay),
+      transform 1.8s $motion-ease var(--reveal-delay);
+  }
+
+  &.is-in[data-loaded] {
+    &::after {
+      transform: scaleY(0);
+    }
+
+    img {
+      transform: none;
+    }
+  }
 }
 
 // ---------- line: hairline이 왼쪽에서 그어지기 (IndexRow 등) ----------
@@ -97,10 +115,8 @@ $motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 // ---------- parallax: 배경 이미지가 스크롤보다 천천히 ----------
+// MotionRoot가 <img>의 transform을 직접 바꿔요. (CSS 변수를 바꾸면 하위 요소 전체 스타일을 다시 계산해서 느려요)
 [data-parallax] img {
-  top: -8% !important;
-  height: 116% !important;
-  transform: translate3d(0, var(--py, 0), 0);
   will-change: transform;
 }
 
@@ -119,7 +135,6 @@ $motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .motion-ready [data-reveal='image'] img {
-    clip-path: none !important;
     transform: none !important;
   }
 
@@ -130,6 +145,10 @@ $motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   [data-parallax] img {
     transform: none !important;
+  }
+
+  .motion-ready [data-reveal='image']::after {
+    display: none;
   }
 }
 

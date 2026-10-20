@@ -223,6 +223,14 @@
     font-size: 10px;
     white-space: nowrap;
   }
+
+  // 모바일은 띠가 오른쪽 끝에 붙어 있어 라벨을 오른쪽 기준으로 맞춰요 (잘림 방지)
+  @include down($bp-md) {
+    span {
+      left: auto;
+      right: 0;
+    }
+  }
 }
 
 .morning {

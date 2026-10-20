@@ -23,11 +23,17 @@ export default function Img({
 }) {
   const ref = useRef(null);
   const [failed, setFailed] = useState(false);
+  // 이미지 파일이 다 내려온 뒤에만 보여줘요 — 큰 사진이 늦게 도착해 '팍' 하고 나타나는 걸 막아요.
+  const [loaded, setLoaded] = useState(false);
 
-  // 하이드레이션 전에 이미 로드 실패한 경우도 잡아요.
+  // 하이드레이션 전에 이미 로드가 끝났거나(캐시) 실패한 경우도 잡아요.
   useEffect(() => {
     const img = ref.current;
-    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
+    if (!img) return;
+    if (img.complete) {
+      if (img.naturalWidth === 0) setFailed(true);
+      else setLoaded(true);
+    }
   }, [src]);
 
   return (
@@ -35,6 +41,7 @@ export default function Img({
       className={cx(styles.frame, className)}
       data-reveal={reveal ? (parallax && reveal === 'image' ? 'fade' : reveal) : undefined}
       data-parallax={parallax || undefined}
+      data-loaded={loaded || undefined}
     >
       {src && !failed && (
         <img
@@ -43,6 +50,7 @@ export default function Img({
           alt={alt}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
+          onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}
           style={{
             filter: sat ? `saturate(${1 + sat})` : undefined,

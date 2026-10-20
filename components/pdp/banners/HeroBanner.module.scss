@@ -116,13 +116,14 @@
 
   @include down($bp-md) {
     left: 28px;
-    right: auto;
+    right: 28px;
     bottom: 40px;
+  }
+}
 
-    // 모바일은 첫 문장만
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+// 모바일은 첫 문장만 (말줄임 대신 나머지 문장을 숨겨요)
+.more {
+  @include down($bp-md) {
+    display: none;
   }
 }

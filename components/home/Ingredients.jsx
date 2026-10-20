@@ -10,7 +10,7 @@ import styles from './Ingredients.module.scss';
 export default function Ingredients({ index = '(04)  Ingredients', count = '04 / 07', id }) {
   return (
     <section className={styles.section} id={id}>
-      <Img src={images.light} sat={-0.3} className={styles.light} reveal={false} parallax={0.15} />
+      <Img src={images.light} sat={-0.3} className={styles.light} reveal={false} />
       <div className={styles.content}>
         <IndexRow left={index} right={`Dewfield — ${count}`} mobileRight={count} dark />
         <div className={styles.titleRow}>
