@@ -7,6 +7,10 @@
   position: relative;
   display: block;
   overflow: hidden;
+  // iOS Safari는 transform 애니메이션 중인 이미지를 overflow: hidden으로 못 자르는 경우가 있어요.
+  // contain: paint로 그리기 영역을 프레임 안으로 확실히 가둬요.
+  contain: paint;
+  isolation: isolate;
   background: c(paper-2);
 }
 

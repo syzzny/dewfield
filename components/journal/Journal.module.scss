@@ -53,10 +53,13 @@
   width: 62.5%;
   flex: none;
 
-  &:hover :global(.is-in) img,
-  &:hover img {
-    transform: scale(1.02);
-    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  // 마우스가 있는 기기에서만 확대 — 모바일에서는 탭하면 :hover가 남아 이미지가 커진 채로 보여요
+  @media (hover: hover) and (pointer: fine) {
+    &:hover :global(.is-in) img,
+    &:hover img {
+      transform: scale(1.02);
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
   }
 
   img {

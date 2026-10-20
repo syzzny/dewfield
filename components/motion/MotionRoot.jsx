@@ -46,6 +46,8 @@ export default function MotionRoot() {
           }
           el.classList.add('is-in');
           io.unobserve(el);
+          // 등장이 끝나면 지연값을 지워요 — 이후 hover 같은 반응이 늦게 시작되지 않게
+          setTimeout(() => el.style.setProperty('--reveal-delay', '0ms'), 2500);
         });
       },
       { rootMargin: '0px 0px -6% 0px', threshold: 0.1 },

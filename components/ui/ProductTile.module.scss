@@ -8,10 +8,13 @@
   min-width: 0;
 
   // 리빌 모션(.is-in)보다 우선하도록 선택자를 한 단계 높여요
-  &:hover .img:global(.is-in) img,
-  &:hover .img img {
-    transform: scale(1.03);
-    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  // 마우스가 있는 기기에서만 확대 — 모바일에서는 탭하면 :hover가 남아 이미지가 커진 채로 보여요
+  @media (hover: hover) and (pointer: fine) {
+    &:hover .img:global(.is-in) img,
+    &:hover .img img {
+      transform: scale(1.03);
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
   }
 }
 

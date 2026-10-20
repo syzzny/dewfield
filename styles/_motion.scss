@@ -73,20 +73,25 @@ $motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   img {
-    transform: scale(1.08);
     transition:
       opacity 0.5s ease var(--reveal-delay),
       transform 1.8s $motion-ease var(--reveal-delay);
   }
 
-  &.is-in[data-loaded] {
-    &::after {
-      transform: scaleY(0);
-    }
+  // 등장 전에만 살짝 확대해 둬요. 등장 후에는 transform을 비워 두어
+  // 카드의 마우스 hover 확대(scale 1.03) 같은 다른 규칙이 그대로 동작해요.
+  &:not(.is-in) img,
+  &:not([data-loaded]) img {
+    transform: scale(1.08);
 
-    img {
-      transform: none;
+    // 모바일은 화면이 작아 확대가 크게 느껴져요 — 살짝만
+    @media (max-width: 899px) {
+      transform: scale(1.04);
     }
+  }
+
+  &.is-in[data-loaded]::after {
+    transform: scaleY(0);
   }
 }
 
