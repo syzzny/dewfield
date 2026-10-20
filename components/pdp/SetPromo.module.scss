@@ -1,0 +1,179 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  @include container;
+  padding-top: fl(64, 140);
+  padding-bottom: fl(40, 0);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  min-height: 680px;
+  background: c(paper-2);
+  overflow: hidden;
+
+  @include down($bp-md) {
+    flex-direction: column;
+    min-height: 0;
+  }
+}
+
+.media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 82%;
+
+  @include down($bp-md) {
+    position: relative;
+    width: 100%;
+    height: 260px;
+  }
+}
+
+.img {
+  height: 100%;
+}
+
+.fade {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 47%;
+  background: linear-gradient(90deg, #e8e3d8 0%, rgba(232, 227, 216, 0) 100%);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.timer {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  padding: 8px 14px;
+  background: rgba(247, 245, 237, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  > span {
+    font-size: 9px;
+  }
+
+  > span:first-child {
+    margin-right: 9px;
+  }
+
+  b {
+    margin-left: 6px;
+    @include serif(18);
+  }
+
+  @include up($bp-md) {
+    display: none;
+  }
+}
+
+.copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 56px;
+
+  @include down($bp-md) {
+    gap: 18px;
+    padding: 24px 20px 28px;
+  }
+}
+
+.tagRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tag {
+  padding: 6px 12px;
+  background: c(olive-dark);
+  font-size: fl(9, 10);
+}
+
+.title {
+  @include serif(46, 96, 0.92);
+  letter-spacing: -0.03em;
+  @include accent;
+}
+
+.body {
+  @include kr(13, 16, 300, 1.75);
+  color: c(ink-soft);
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: fl(10, 16);
+
+  s {
+    @include price(13, 16);
+    color: c(ink-soft);
+  }
+}
+
+.now {
+  @include price-display(32, 52);
+}
+
+.off {
+  padding: 5px 10px;
+  border: 1px solid c(olive);
+  @include kr(12, 13, 500, 1.22);
+  color: c(olive);
+
+  @include down($bp-md) {
+    padding: 0;
+    border: 0;
+  }
+}
+
+.includes {
+  display: flex;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 28px 0 0;
+    @include hairline;
+    @include kr(13);
+  }
+
+  li:last-child {
+    padding-right: 0;
+  }
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.cta {
+  align-self: flex-start;
+
+  @include down($bp-md) {
+    align-self: stretch;
+    justify-content: space-between;
+  }
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none;
+  }
+}

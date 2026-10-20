@@ -1,0 +1,23 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid c(ink);
+
+  button,
+  .value {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    font-family: $font-sans;
+    font-size: 15px;
+  }
+
+  button:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}

@@ -1,0 +1,332 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// ---------- hero ----------
+.hero {
+  position: relative;
+  height: fl(780, 900);
+  overflow: hidden;
+  color: c(cream);
+  background: c(olive-dark);
+}
+
+.heroImg {
+  @include cover;
+}
+
+.heroShade {
+  @include cover;
+  background: linear-gradient(
+    180deg,
+    rgba(23, 31, 20, 0.45) 0%,
+    rgba(23, 31, 20, 0.15) 50%,
+    rgba(23, 31, 20, 0.7) 100%
+  );
+}
+
+.heroLines {
+  position: absolute;
+  inset: fl(56, 72) 0 0;
+
+  i {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(247, 244, 238, 0.2);
+
+    &:nth-child(1) {
+      left: fl(20, 48);
+    }
+    &:nth-child(2) {
+      left: 50%;
+    }
+    &:nth-child(3) {
+      right: fl(20, 48);
+    }
+  }
+}
+
+.heroLabel {
+  position: absolute;
+  top: fl(76, 104);
+  left: fl(28, 64);
+}
+
+.heroTitle {
+  font-weight: 400;
+
+  span,
+  em {
+    position: absolute;
+    @include serif(76, 260, 0.8);
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+  }
+
+  span {
+    top: fl(220, 260);
+    left: fl(16, 40);
+  }
+
+  em {
+    top: fl(290, 480);
+    left: fl(20, 300);
+    color: c(sage);
+  }
+}
+
+.heroLead {
+  position: absolute;
+  left: fl(28, 64);
+  bottom: fl(64, 72);
+  @include kr(20, 26, 300, 1.5);
+  letter-spacing: -0.015em;
+}
+
+// ---------- common ----------
+.section {
+  @include section(72, 140, 80, 140);
+  @include stack(32, 64);
+}
+
+// ---------- origin ----------
+.origin {
+  display: flex;
+  gap: 96px;
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 32px;
+  }
+}
+
+.originText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.originTitle {
+  @include serif(48, 80, 0.95);
+  letter-spacing: -0.03em;
+  @include accent;
+}
+
+.originBody {
+  max-width: 600px;
+  @include kr(15, 17, 300, 1.85);
+  color: c(ink-soft);
+  white-space: pre-line;
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 520px;
+  flex: none;
+
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+
+    em {
+      @include serif(15);
+      color: c(ink-soft);
+    }
+  }
+
+  @include down($bp-lg) {
+    width: 40%;
+  }
+
+  @include down($bp-md) {
+    width: 100%;
+  }
+}
+
+.figImg {
+  aspect-ratio: 520 / 640;
+}
+
+// ---------- principles ----------
+.principles {
+  background: c(olive-dark);
+  color: c(cream);
+}
+
+.bigTitle {
+  @include serif(56, 110, 0.9);
+  letter-spacing: -0.03em;
+  @include accent;
+}
+
+.principles .bigTitle em {
+  color: c(sage);
+}
+
+.rules {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 24px;
+    border-top: 1px solid c(cream);
+  }
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+
+    li {
+      gap: 12px;
+    }
+  }
+}
+
+.ruleNo {
+  @include serif(72, 120, 0.8);
+  letter-spacing: -0.04em;
+  color: c(sage);
+}
+
+.ruleHead {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.ruleEn {
+  @include serif(32, 40);
+}
+
+.ruleKo {
+  @include kr(14, 15, 400);
+}
+
+.ruleText {
+  @include kr(14, 15, 300, 1.8);
+}
+
+// ---------- field ----------
+.field {
+  padding-top: fl(72, 140);
+  @include stack(32, 56);
+}
+
+.fieldHead {
+  @include container;
+  @include stack(28, 40);
+}
+
+.fieldMedia {
+  position: relative;
+  aspect-ratio: 1440 / 680;
+
+  @include down($bp-md) {
+    aspect-ratio: 390 / 420;
+  }
+}
+
+.fieldImg {
+  height: 100%;
+}
+
+.coords {
+  position: absolute;
+  left: fl(20, 48);
+  bottom: fl(20, 48);
+  display: flex;
+  gap: fl(24, 48);
+  padding: fl(14, 20) fl(18, 28);
+  background: rgba(242, 239, 232, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  strong {
+    font-weight: 400;
+    @include serif(22, 30);
+  }
+
+  span {
+    @include kr(11, 12);
+    color: c(ink-soft);
+  }
+
+  @include down($bp-md) {
+    right: 20px;
+    justify-content: space-between;
+  }
+}
+
+// ---------- numbers ----------
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+    @include hairline(ink, 1);
+  }
+
+  @include down($bp-md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 12px;
+  }
+}
+
+.numValue {
+  @include serif(52, 110, 0.9);
+  letter-spacing: -0.04em;
+}
+
+.numLabel {
+  @include kr(13, 14);
+  color: c(ink-soft);
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-top: fl(24, 56);
+  text-align: center;
+
+  blockquote {
+    @include kr(26, 48, 300, 1.45);
+    letter-spacing: -0.025em;
+  }
+}
+
+.cta {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 16px;
+
+  @include down($bp-md) {
+    flex-direction: column;
+    align-self: stretch;
+
+    a {
+      justify-content: space-between;
+    }
+  }
+}

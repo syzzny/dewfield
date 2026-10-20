@@ -1,0 +1,8 @@
+@use 'mixins' as *;
+
+.stars {
+  @include kr(10, 11, 500, 1.45);
+  letter-spacing: 0.08em;
+  color: c(olive);
+  white-space: pre;
+}

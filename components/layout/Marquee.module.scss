@@ -1,0 +1,48 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.marquee {
+  overflow: hidden;
+  padding-block: fl(16, 26);
+  background: c(olive-dark);
+  color: c(sage);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: scroll 40s linear infinite;
+
+  .marquee:hover & {
+    animation-play-state: paused;
+  }
+}
+
+.group {
+  display: flex;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: fl(20, 40);
+  padding-right: fl(20, 40);
+}
+
+.word {
+  @include serif(28, 44);
+  font-style: italic;
+}
+
+.dot {
+  width: fl(5, 8);
+  height: fl(5, 8);
+  border-radius: 50%;
+  background: currentColor;
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}

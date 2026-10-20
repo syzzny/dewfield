@@ -1,0 +1,101 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  @include section(72, 120, 80, 120);
+  @include stack(24, 56);
+}
+
+.bar {
+  display: flex;
+  gap: 3px;
+  height: fl(56, 120);
+
+  span {
+    flex-basis: 0;
+    min-width: 5px;
+  }
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+
+  li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 12px;
+    padding: 16px 16px 0 0;
+    border-top: 1px solid rgba(28, 36, 28, 0.18);
+  }
+
+  i {
+    grid-column: 1 / -1;
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(28, 36, 28, 0.2);
+  }
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+    gap: 0;
+
+    li {
+      grid-template-columns: 12px 1fr auto;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    i {
+      grid-column: auto;
+      grid-row: 1;
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
+
+.value {
+  grid-column: 1 / -1;
+  @include serif(14, 40);
+
+  @include down($bp-md) {
+    grid-column: 3;
+    grid-row: 1;
+    font-family: $font-sans;
+  }
+}
+
+.en {
+  grid-column: 1 / -1;
+  @include serif(18);
+
+  @include down($bp-md) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+.ko {
+  grid-column: 1 / -1;
+  @include kr(12);
+  color: c(ink-soft);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+// ---------- motion: 성분 막대가 차례로 왼쪽부터 채워져요 ----------
+:global(.motion-ready) .bar {
+  span {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i) * 0.14s);
+  }
+
+  &:global(.is-in) span {
+    transform: none;
+  }
+}

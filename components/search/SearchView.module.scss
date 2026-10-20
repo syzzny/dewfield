@@ -1,0 +1,245 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.bar {
+  @include container;
+  @include stack(12, 20);
+  padding-top: fl(0, 48);
+  padding-bottom: fl(24, 32);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: fl(10, 16);
+  border-bottom: 1px solid c(ink);
+
+  input {
+    flex: 1;
+    min-width: 0;
+    outline: none;
+    @include kr(36, 60, 300, 1.45);
+    letter-spacing: -0.02em;
+
+    &::placeholder {
+      color: c(ink, 0.25);
+    }
+  }
+}
+
+.serifInput {
+  font-family: $font-serif !important;
+  font-weight: 400 !important;
+  font-size: fl(44, 80) !important;
+  line-height: 1.18 !important;
+}
+
+.clear {
+  @include label;
+  white-space: pre;
+}
+
+.summary {
+  @include kr(12, 14);
+  color: c(ink-soft);
+}
+
+.tabs {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid c(ink);
+
+  button {
+    padding-bottom: 10px;
+    margin-bottom: -1px;
+    border-bottom: 2px solid transparent;
+    @include serif(18);
+  }
+
+  .tabOn {
+    border-bottom-color: c(ink);
+  }
+
+  @include up($bp-md) {
+    display: none;
+  }
+}
+
+.idle {
+  @include container;
+  @include stack(12, 16);
+  padding-bottom: 120px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.body {
+  @include container;
+  display: flex;
+  gap: 72px;
+  padding-top: 16px;
+  padding-bottom: fl(56, 120);
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 32px;
+    padding-top: 0;
+  }
+}
+
+.products {
+  @include stack(12, 24);
+  flex: 1;
+  min-width: 0;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+
+  @include down($bp-md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+.journal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 380px;
+  flex: none;
+
+  @include down($bp-md) {
+    width: 100%;
+    gap: 0;
+  }
+}
+
+.story {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0 16px;
+  border-bottom: 1px solid c(ink);
+
+  @include down($bp-md) {
+    padding-block: 12px;
+    border-bottom: 0;
+    border-top: 1px solid c(ink);
+  }
+}
+
+.storyImg {
+  width: fl(52, 96);
+  height: fl(64, 120);
+  flex: none;
+}
+
+.storyText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.storyTitle {
+  @include serif(20, 24);
+}
+
+.storyKo {
+  @include kr(13);
+  color: c(ink-soft);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.related {
+  @include stack(12);
+  padding-top: 12px;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.hideMobile {
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+// ---------- no results ----------
+.none {
+  @include container;
+  display: flex;
+  gap: 96px;
+  padding-top: fl(16, 40);
+  padding-bottom: fl(72, 120);
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 48px;
+  }
+}
+
+.noneText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.noneTitle {
+  @include serif(44, 72, 0.95);
+  letter-spacing: -0.02em;
+  @include accent;
+}
+
+.noneLead {
+  @include kr(14, 16, 300, 1.8);
+  color: c(ink-soft);
+}
+
+.suggest {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+
+  > span {
+    @include kr(13);
+    color: c(ink-soft);
+  }
+}
+
+.finderBtn {
+  @include down($bp-md) {
+    align-self: stretch;
+    justify-content: space-between;
+  }
+}
+
+.loved {
+  @include stack(20);
+  width: 420px;
+  flex: none;
+
+  @include down($bp-md) {
+    width: 100%;
+  }
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none !important;
+  }
+}

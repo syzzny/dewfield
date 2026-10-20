@@ -1,0 +1,408 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.loading {
+  min-height: 60vh;
+}
+
+.header {
+  @include container;
+  @include stack(20, 36);
+  padding-top: fl(28, 40);
+  padding-bottom: fl(8, 40);
+}
+
+.title {
+  @include serif(60, 120, 0.9);
+  letter-spacing: -0.04em;
+  @include accent;
+}
+
+.body {
+  @include container;
+  display: flex;
+  gap: 72px;
+  padding-bottom: fl(0, 120);
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 0;
+    padding-inline: 0;
+  }
+}
+
+.items {
+  flex: 1;
+  min-width: 0;
+
+  @include down($bp-md) {
+    padding: 0 20px 24px;
+  }
+}
+
+.shipping {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 24px;
+
+  @include down($bp-md) {
+    gap: 8px;
+    padding: 12px 0 8px;
+  }
+}
+
+.shippingText {
+  display: flex;
+  justify-content: space-between;
+  @include kr(12, 14, 400);
+
+  .soft {
+    @include price(11, 13);
+    color: c(ink-soft);
+  }
+}
+
+.soft {
+  @include kr(11, 13, 400);
+  color: c(ink-soft);
+}
+
+.bar {
+  display: block;
+  height: 2px;
+  background: c(ink, 0.12);
+
+  i {
+    display: block;
+    height: 100%;
+    background: c(olive-dark);
+    transform-origin: left;
+    transition: transform 0.6s $ease;
+  }
+}
+
+.list {
+  border-bottom: 1px solid c(ink);
+}
+
+.item {
+  display: flex;
+  gap: fl(16, 28);
+  padding-block: fl(20, 28);
+  border-top: 1px solid c(ink);
+
+  @include down($bp-md) {
+    border-top-color: c(ink, $line-opacity);
+  }
+}
+
+.thumb {
+  width: fl(84, 120);
+  height: fl(105, 150);
+  flex: none;
+
+  > span {
+    height: 100%;
+  }
+}
+
+.info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: fl(6, 8);
+  min-width: 0;
+}
+
+.nameRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  @include serif(20, 28);
+}
+
+.short,
+.removeX,
+.mobileInline,
+.mobilePrice {
+  display: none;
+}
+
+.ko {
+  @include kr(12, 14);
+  color: c(ink-soft);
+}
+
+.option {
+  @include kr(13);
+  color: c(ink-soft);
+}
+
+.qtyRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: fl(8, 12);
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.price {
+  @include price(17);
+}
+
+.remove {
+  padding-bottom: 2px;
+  border-bottom: 1px solid c(ink);
+  @include kr(12);
+  color: c(ink-soft);
+}
+
+@include down($bp-md) {
+  .full,
+  .option,
+  .side {
+    display: none;
+  }
+
+  .short,
+  .mobileInline {
+    display: inline;
+  }
+
+  .removeX {
+    display: block;
+    font-size: 12px;
+    color: c(ink-soft);
+  }
+
+  .mobilePrice {
+    display: inline;
+    @include price(14);
+  }
+}
+
+.gift {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 24px;
+  @include kr(13, 14);
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  input:checked + .box {
+    background: c(olive-dark);
+    border-color: c(olive-dark);
+  }
+
+  input:focus-visible + .box {
+    outline: 1px solid c(olive);
+    outline-offset: 3px;
+  }
+}
+
+.box {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  border: 1px solid c(ink);
+}
+
+// ---------- summary ----------
+.summary {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: 440px;
+  flex: none;
+  padding: 32px;
+  background: c(paper-2);
+
+  @include up($bp-md) {
+    position: sticky;
+    top: 96px;
+  }
+
+  @include down($bp-lg) {
+    width: 380px;
+  }
+
+  @include down($bp-md) {
+    width: 100%;
+    padding: 24px 20px;
+  }
+}
+
+.summaryTitle {
+  margin-bottom: fl(12, 20);
+  font-weight: 400;
+  @include serif(26, 32);
+}
+
+.rows div {
+  display: flex;
+  justify-content: space-between;
+  padding-block: fl(8, 10);
+  @include kr(13, 14);
+
+  dt {
+    color: c(ink-soft);
+  }
+
+  dd {
+    @include price(13, 14);
+  }
+}
+
+.accent {
+  color: c(olive);
+}
+
+.coupon {
+  padding-block: 8px 16px;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.desktopRow {
+  @include down($bp-md) {
+    display: none !important;
+  }
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: fl(14, 20) 0 fl(4, 24);
+  border-top: 1px solid c(ink);
+  @include kr(15, 16, 400);
+
+  strong {
+    @include price-display(28, 34);
+  }
+}
+
+// 모바일에서는 화면 아래 고정 바
+.orderBar {
+  @include down($bp-md) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: 12px 20px 28px;
+    background: c(paper);
+    border-top: 1px solid c(ink);
+  }
+}
+
+.pay {
+  padding-top: 12px;
+  @include kr(12);
+  color: c(ink-soft);
+  text-align: center;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 24px;
+  @include kr(12);
+  color: c(ink-soft);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.mobileOnly {
+  @include up($bp-md) {
+    display: none;
+  }
+}
+
+// ---------- cross-sell ----------
+.cross {
+  @include container;
+  @include stack(18, 40);
+  padding-top: fl(40, 72);
+  padding-bottom: fl(140, 120);
+  border-top: 1px solid c(ink);
+
+  @include down($bp-md) {
+    border-top: 0;
+  }
+}
+
+.crossHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  p {
+    @include down($bp-md) {
+      display: none;
+    }
+  }
+}
+
+.crossTitle {
+  @include serif(32, 64);
+  letter-spacing: -0.02em;
+  @include accent;
+}
+
+.crossGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+
+  @include down($bp-md) {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    margin-inline: -20px;
+    padding-inline: 20px;
+    scrollbar-width: none;
+  }
+}
+
+.crossTile {
+  @include down($bp-md) {
+    flex: 0 0 169px;
+  }
+}
+
+// 고정 주문 바에 푸터가 가리지 않도록
+@include down($bp-md) {
+  :global(body):has(.orderBar) {
+    padding-bottom: 95px;
+  }
+}

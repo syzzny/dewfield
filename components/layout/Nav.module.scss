@@ -1,0 +1,112 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+$h-d: 72px;
+$h-m: 56px;
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: $h-m;
+  background: c(paper);
+  color: c(ink);
+  border-bottom: 1px solid c(ink, $line-opacity);
+  transition:
+    background-color 0.4s $ease,
+    color 0.4s $ease,
+    border-color 0.4s $ease;
+
+  @include up($bp-md) {
+    height: $h-d;
+  }
+}
+
+// 히어로 위에 겹치기 — 다음 요소를 헤더 높이만큼 끌어올려요.
+.overlay {
+  margin-bottom: -$h-m;
+
+  @include up($bp-md) {
+    margin-bottom: -$h-d;
+  }
+}
+
+.dark {
+  background: transparent;
+  color: c(cream);
+  border-bottom-color: c(cream, $line-opacity);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 100%;
+  padding-inline: fl(20, 48);
+}
+
+.menu,
+.utility {
+  display: flex;
+  @include label(10, 11);
+
+  a {
+    transition: opacity 0.3s $ease;
+
+    &:hover {
+      opacity: 0.55;
+    }
+  }
+}
+
+.menu {
+  gap: 36px;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.active {
+  opacity: 0.55;
+}
+
+.menuButton {
+  justify-self: start;
+  @include label(10, 11);
+
+  @include up($bp-md) {
+    display: none;
+  }
+}
+
+.logo {
+  @include serif(24, 30);
+  letter-spacing: -0.01em;
+}
+
+.utility {
+  justify-content: flex-end;
+  gap: 28px;
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.checkout {
+  position: relative;
+  height: fl(59, 80);
+  border-bottom-color: c(ink);
+}
+
+.back,
+.secure {
+  @include label(10, 11);
+}
+
+.secure {
+  justify-self: end;
+}

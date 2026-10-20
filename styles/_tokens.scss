@@ -1,0 +1,38 @@
+// =============================================================
+// Design tokens — Figma "Dewfield / Color" 컬렉션의 ed/ 변수와 1:1 대응
+// 색을 바꿀 때는 여기만 수정하면 전체에 반영돼요.
+// =============================================================
+
+$colors: (
+  'paper': #f2efe8,
+  'paper-2': #e8e3d8,
+  'ink': #1c231c,
+  'ink-soft': #5a6157,
+  'olive': #5e6b47,
+  'olive-dark': #2b3424,
+  'sage': #c6cdb3,
+  'cream': #f7f4ee,
+);
+
+// 투명도 hairline (Figma: ink 18% / 50%)
+$line-opacity: 0.18;
+$line-strong-opacity: 0.5;
+
+// 레이아웃
+$frame-max: 1440px;
+$frame-min: 390px;
+$gutter-d: 48px;
+$gutter-m: 20px;
+
+// 브레이크포인트 — 디자인은 1440 / 390 두 개, 그 사이는 유동적으로 늘어나요.
+$bp-sm: 600px;
+$bp-md: 900px;
+$bp-lg: 1200px;
+
+// 폰트 스택 — 영문 폰트에 없는 한글·기호는 자동으로 Noto Sans KR로 대체돼요.
+// 'Won Sign'은 ₩ 한 글자만 Noto Sans KR로 그리는 서체예요 (globals.scss). Figma와 같은 ₩ 모양을 쓰기 위해서예요.
+$font-serif: 'Won Sign', 'Instrument Serif', 'Noto Sans KR', serif;
+$font-sans: 'Won Sign', 'Instrument Sans', 'Noto Sans KR', sans-serif;
+$font-kr: 'Noto Sans KR', sans-serif;
+
+$ease: cubic-bezier(0.22, 1, 0.36, 1);

@@ -1,0 +1,261 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  @include section(64, 120, 72, 120);
+  @include stack(28, 72);
+}
+
+// ---------- 공통 ----------
+.scale {
+  position: relative;
+  --bar: 56px;
+}
+
+.bar {
+  position: relative;
+  background: linear-gradient(90deg, #d4c79e 0%, #c6cdb3 35%, #5e6b47 60%, #2b3324 100%);
+}
+
+.zone {
+  position: absolute;
+  border: 2px dashed c(cream);
+}
+
+.ticks li {
+  position: absolute;
+  font-family: $font-sans;
+  font-size: 12px;
+  color: c(ink-soft);
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: c(ink, 0.5);
+  }
+}
+
+.dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: c(ink);
+}
+
+.highlight .dot {
+  width: 16px;
+  height: 16px;
+  background: c(cream);
+  border: 3px solid c(ink);
+}
+
+.stem {
+  position: absolute;
+  background: c(ink, 0.5);
+}
+
+.highlight .stem {
+  background: c(ink);
+}
+
+.tag {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.tagTitle {
+  @include serif(18, 20);
+}
+
+.highlight .tagTitle {
+  font-size: fl(26, 30);
+  color: c(olive);
+}
+
+.tagText {
+  @include kr(11, 12);
+  color: c(ink-soft);
+}
+
+// ---------- 데스크톱: 가로 ----------
+@include up($bp-md) {
+  .scale {
+    height: 240px;
+    margin-top: 60px;
+  }
+
+  .bar {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    height: var(--bar);
+  }
+
+  .zone {
+    top: 0;
+    bottom: 0;
+    left: calc(var(--from) * 100%);
+    width: calc((var(--to) - var(--from)) * 100%);
+  }
+
+  .ticks li {
+    top: 148px;
+    left: calc(var(--p) * 100%);
+    transform: translateX(-50%);
+
+    &::before {
+      left: 50%;
+      top: -22px;
+      width: 1px;
+      height: 10px;
+    }
+
+    &.major::before {
+      height: 16px;
+    }
+  }
+
+  .marker {
+    position: absolute;
+    top: 70px;
+    left: calc(var(--p) * 100%);
+  }
+
+  .dot {
+    top: calc(var(--bar) / 2);
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  .stem {
+    left: 0;
+    bottom: 100%;
+    width: 1px;
+    height: 56px;
+  }
+
+  .tag {
+    bottom: calc(100% + 56px + 4px);
+    left: 0;
+    align-items: center;
+    transform: translateX(-50%);
+  }
+
+  .below {
+    .stem {
+      top: var(--bar);
+      bottom: auto;
+      height: 40px;
+    }
+
+    .tag {
+      top: calc(var(--bar) + 54px);
+      bottom: auto;
+    }
+  }
+}
+
+// ---------- 모바일: 세로 ----------
+@include down($bp-md) {
+  .scale {
+    height: 460px;
+  }
+
+  .bar {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+    width: 40px;
+    background: linear-gradient(180deg, #d4c79e 0%, #c6cdb3 35%, #5e6b47 60%, #2b3324 100%);
+  }
+
+  .zone {
+    left: 0;
+    right: 0;
+    top: calc(var(--from) * 100%);
+    height: calc((var(--to) - var(--from)) * 100%);
+  }
+
+  .ticks {
+    display: none;
+  }
+
+  .marker {
+    position: absolute;
+    left: 0;
+    right: 0;
+    // 모바일에선 라벨이 겹치지 않게 살짝 벌린 위치(--pm)를 써요.
+    top: calc(10px + var(--pm) * (100% - 20px));
+  }
+
+  .dot {
+    left: 20px;
+    top: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  .stem {
+    left: 44px;
+    top: 0;
+    width: 56px;
+    height: 1px;
+  }
+
+  .highlight .stem {
+    width: 80px;
+  }
+
+  .tag {
+    left: 108px;
+    top: 0;
+    transform: translateY(-50%);
+  }
+
+  .highlight .tag {
+    left: 132px;
+  }
+}
+
+// ---------- motion: 그라디언트 막대가 열리고, 마커가 pH 순서대로 꽂혀요 ----------
+:global(.motion-ready) .scale {
+  .bar {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+    @include down($bp-md) {
+      clip-path: inset(0 0 100% 0);
+    }
+  }
+
+  .ticks li,
+  .marker {
+    opacity: 0;
+    transition: opacity 0.8s ease var(--d, 0.8s);
+  }
+
+  .stem {
+    transform: scale(0);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0.8s);
+  }
+
+  &:global(.is-in) {
+    .bar {
+      clip-path: inset(0 0 0 0);
+    }
+
+    .ticks li,
+    .marker {
+      opacity: 1;
+    }
+
+    .stem {
+      transform: none;
+    }
+  }
+}

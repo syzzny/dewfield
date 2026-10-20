@@ -1,0 +1,56 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: fl(32, 48);
+  padding-top: fl(72, 140);
+  padding-bottom: fl(80, 140);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.title {
+  @include serif(60, 96, 0.92);
+  letter-spacing: -0.03em;
+  @include accent;
+}
+
+.link {
+  @include down($bp-md) {
+    display: none !important;
+  }
+}
+
+// 데스크톱 4열, 모바일 가로 스크롤
+.strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+
+  @include down($bp-md) {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: -20px;
+    padding-inline: 20px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.card {
+  @include down($bp-md) {
+    flex: 0 0 250px;
+    scroll-snap-align: start;
+  }
+}

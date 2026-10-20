@@ -1,0 +1,32 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.band {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 40px fl(20, 48);
+  background: c(paper-2);
+  border-top: 1px solid c(ink);
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 12px;
+    padding-block: 32px;
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.en {
+  @include serif(20, 24);
+}
+
+.ko {
+  @include kr(12, 13);
+  color: c(ink-soft);
+}

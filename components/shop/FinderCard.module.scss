@@ -1,0 +1,54 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  padding: fl(24, 36) fl(22, 36);
+  background: c(olive-dark);
+  color: c(cream);
+  min-height: 100%;
+
+  &:hover .cta {
+    background: c(sage);
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: fl(14, 20);
+}
+
+.title {
+  @include serif(36, 52, 0.95);
+  letter-spacing: -0.015em;
+  @include accent(sage);
+}
+
+.text {
+  @include kr(15, 15, 300, 1.7);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.cta {
+  align-self: flex-start;
+  display: inline-flex;
+  gap: 20px;
+  padding: fl(12, 16) fl(18, 24);
+  background: c(cream);
+  color: c(ink);
+  @include kr(13, 14, 500);
+  transition: background 0.3s $ease;
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none;
+  }
+}

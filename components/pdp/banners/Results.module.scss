@@ -1,0 +1,86 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: fl(28, 0);
+  padding-bottom: fl(72, 140);
+  background: #d5dad4;
+}
+
+.head {
+  @include container;
+  @include stack(28, 40);
+  padding-top: fl(72, 120);
+}
+
+.title {
+  @include serif(56, 120, 0.9);
+  letter-spacing: -0.03em;
+  @include accent;
+
+  @include up($bp-md) {
+    margin-bottom: -8px;
+  }
+}
+
+.img {
+  aspect-ratio: 1440 / 620;
+  background: transparent;
+
+  @include down($bp-md) {
+    aspect-ratio: 390 / 260;
+  }
+}
+
+.stats {
+  @include container;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 20px;
+    @include hairline;
+  }
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+    gap: 0;
+
+    li {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding-block: 16px;
+    }
+  }
+}
+
+.value {
+  @include serif(60, 120, 1);
+  letter-spacing: -0.04em;
+}
+
+.text {
+  @include kr(13, 16, 300, 1.7);
+  color: c(ink-soft);
+  white-space: pre-line;
+
+  @include down($bp-md) {
+    white-space: normal;
+    text-align: right;
+    max-width: 50%;
+  }
+}
+
+.note {
+  @include container;
+  padding-top: fl(0, 40);
+  @include kr(11, 12);
+  color: c(ink-soft);
+}

@@ -1,0 +1,68 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.label {
+  @include kr(12, 12, 400);
+  color: c(ink-soft);
+}
+
+.control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid c(ink);
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-bottom-color: c(olive);
+  }
+
+  input,
+  select {
+    flex: 1;
+    min-width: 0;
+    outline: none;
+    appearance: none;
+    @include kr(15, 16);
+
+    &::placeholder {
+      color: c(ink, 0.35);
+    }
+  }
+
+  select {
+    cursor: pointer;
+  }
+}
+
+.caret {
+  position: absolute;
+  right: 0;
+  font-size: 12px;
+  color: c(olive);
+  pointer-events: none;
+}
+
+.action {
+  @include kr(12);
+  color: c(olive);
+  white-space: nowrap;
+}
+
+.hasError .control {
+  border-bottom-color: #a94a43;
+}
+
+.error {
+  @include kr(12);
+  color: #a94a43;
+}

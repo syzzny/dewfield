@@ -1,0 +1,159 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: fl(32, 64);
+  padding-top: fl(72, 140);
+  padding-bottom: fl(80, 160);
+}
+
+.body {
+  display: flex;
+  gap: 80px;
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 32px;
+  }
+}
+
+.visual {
+  position: relative;
+  width: 620px;
+  flex: none;
+  aspect-ratio: 620 / 820;
+  overflow: hidden;
+
+  @include down($bp-lg) {
+    width: 45%;
+  }
+
+  @include down($bp-md) {
+    width: 100%;
+    aspect-ratio: 350 / 400;
+  }
+}
+
+.img {
+  position: absolute;
+  inset: -30px;
+  height: auto;
+
+  img {
+    filter: blur(6px) saturate(0.7) !important;
+  }
+}
+
+.caption {
+  position: absolute;
+  left: fl(20, 36);
+  bottom: fl(28, 36);
+  @include serif(60, 96, 0.9);
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: c(cream);
+}
+
+.steps {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.title {
+  margin-bottom: fl(32, 48);
+  @include kr(26, 44, 300, 1.4);
+  letter-spacing: -0.025em;
+}
+
+.list {
+  border-bottom: 1px solid c(ink, $line-opacity);
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: fl(18, 36);
+  padding-block: fl(18, 28);
+  @include hairline;
+
+  &:hover .arrow {
+    transform: translateX(6px);
+  }
+}
+
+.no {
+  @include serif(36, 56, 1);
+  color: c(olive);
+}
+
+.stepText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: fl(4, 6);
+}
+
+.stepHead {
+  display: flex;
+  align-items: baseline;
+  gap: fl(10, 14);
+}
+
+.en {
+  @include serif(22, 28);
+}
+
+.ko {
+  @include kr(13, 15, 400);
+  color: c(ink-soft);
+}
+
+.desc {
+  @include kr(13, 15);
+  color: c(ink-soft);
+}
+
+.arrow {
+  @include label;
+  transition: transform 0.4s $ease;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+
+  @include down($bp-md) {
+    padding-top: 32px;
+  }
+}
+
+.setName {
+  @include serif(24);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.mobileBtn {
+  @include up($bp-md) {
+    display: none !important;
+  }
+}
+
+.desktopBtn {
+  @include down($bp-md) {
+    display: none !important;
+  }
+}

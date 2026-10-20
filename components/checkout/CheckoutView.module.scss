@@ -1,0 +1,415 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.loading {
+  min-height: 70vh;
+}
+
+.emptyState {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  padding-block: 120px;
+  @include kr(16);
+}
+
+.header {
+  @include container;
+  @include stack(24, 32);
+  padding-top: fl(20, 48);
+  padding-bottom: fl(8, 40);
+}
+
+.steps {
+  display: flex;
+
+  li {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: fl(10, 14);
+    border-top: 1px solid c(ink);
+  }
+
+  .current {
+    border-top-width: 2px;
+    margin-top: -1px;
+  }
+
+  @include down($bp-md) {
+    li {
+      flex-direction: row;
+      gap: 4px;
+    }
+  }
+}
+
+.stepName {
+  @include serif(26);
+
+  @include down($bp-md) {
+    @include label(9, 9);
+  }
+}
+
+.current .stepName {
+  @include down($bp-md) {
+    color: c(olive);
+  }
+}
+
+.title {
+  @include serif(56, 110, 0.9);
+  letter-spacing: -0.03em;
+  @include accent;
+}
+
+// ---------- mobile fold ----------
+.fold {
+  padding: 0 20px 8px;
+
+  button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 14px 16px;
+    background: c(paper-2);
+    @include kr(13, 13, 400);
+
+    strong {
+      @include price-display(20);
+    }
+  }
+
+  @include up($bp-md) {
+    display: none;
+  }
+}
+
+.foldList {
+  padding: 4px 16px 12px;
+  background: c(paper-2);
+  @include kr(12);
+  color: c(ink-soft);
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 6px;
+
+    span {
+      @include price(12);
+    }
+  }
+}
+
+// ---------- body ----------
+.body {
+  @include container;
+  display: flex;
+  gap: 96px;
+  padding-bottom: fl(40, 140);
+
+  @include down($bp-lg) {
+    gap: 48px;
+  }
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 40px;
+    padding-inline: 0;
+  }
+}
+
+.form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: fl(0, 64);
+  min-width: 0;
+
+  @include down($bp-md) {
+    padding-inline: 20px;
+  }
+}
+
+.section {
+  @include stack(22, 28);
+
+  @include down($bp-md) {
+    padding-top: 36px;
+  }
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
+.methods {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.method {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 22px 20px;
+  border: 1px solid c(ink);
+  @include kr(14, 15, 400);
+  text-align: left;
+  transition: background 0.2s;
+
+  @include down($bp-md) {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+  }
+}
+
+.methodOn {
+  background: c(cream);
+  border-width: 1.5px;
+}
+
+.radio {
+  width: 14px;
+  height: 14px;
+  border: 1px solid c(ink);
+  border-radius: 50%;
+}
+
+.methodOn .radio {
+  background: c(olive-dark);
+}
+
+.agrees {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+
+  @include down($bp-md) {
+    gap: 10px;
+    padding-top: 4px;
+
+    label:last-child {
+      display: none;
+    }
+  }
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  @include kr(13, 14);
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  input:checked + .box {
+    background: c(olive-dark);
+    border-color: c(olive-dark);
+  }
+
+  input:focus-visible + .box {
+    outline: 1px solid c(olive);
+    outline-offset: 3px;
+  }
+}
+
+.box {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  border: 1px solid c(ink);
+}
+
+.muted {
+  color: c(ink-soft);
+}
+
+// ---------- summary ----------
+.summary {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: 440px;
+  flex: none;
+  padding: 32px;
+  background: c(paper-2);
+
+  @include up($bp-md) {
+    position: sticky;
+    top: 24px;
+  }
+
+  @include down($bp-lg) {
+    width: 380px;
+  }
+
+  @include down($bp-md) {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+.summaryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 20px;
+
+  h2 {
+    font-weight: 400;
+    @include serif(32);
+  }
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.lines {
+  margin-bottom: 12px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-block: 12px;
+    border-top: 1px solid c(ink);
+    @include kr(13);
+  }
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.lineImg {
+  width: 52px;
+  height: 64px;
+  flex: none;
+}
+
+.lineName {
+  flex: 1;
+
+  + span {
+    @include price(13);
+  }
+}
+
+.rows {
+  border-top: 1px solid c(ink);
+  padding-top: 6px;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    padding-block: fl(8, 10);
+    @include kr(13, 14);
+  }
+
+  dt {
+    color: c(ink-soft);
+  }
+
+  dd {
+    @include price(13, 14);
+  }
+
+  @include down($bp-md) {
+    border-top: 0;
+    padding-top: 0;
+  }
+}
+
+.accent {
+  color: c(olive);
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: fl(14, 20) 0 fl(4, 24);
+  border-top: 1px solid c(ink);
+  @include kr(15, 16, 400);
+
+  strong {
+    @include price-display(28, 34);
+  }
+}
+
+.payBar {
+  @include down($bp-md) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: 12px 20px 28px;
+    background: c(paper);
+    border-top: 1px solid c(ink);
+  }
+}
+
+.points {
+  padding-top: 14px;
+  @include kr(12);
+  color: c(ink-soft);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.edit {
+  align-self: flex-start;
+  margin-top: 16px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid c(ink);
+  @include kr(12);
+  color: c(ink-soft);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none !important;
+  }
+}
+
+@include down($bp-md) {
+  :global(body):has(.payBar) {
+    padding-bottom: 95px;
+  }
+}

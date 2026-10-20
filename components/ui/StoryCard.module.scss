@@ -1,0 +1,67 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: fl(10, 16);
+  min-width: 0;
+
+  &:hover :global(.is-in) img,
+  &:hover img {
+    transform: scale(1.03);
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  img {
+    transition: transform 1.2s $ease;
+  }
+}
+
+.img {
+  aspect-ratio: 432 / 320;
+}
+
+.home {
+  gap: fl(10, 14);
+
+  .img {
+    aspect-ratio: 327 / 420;
+
+    @include down($bp-md) {
+      aspect-ratio: 250 / 310;
+    }
+  }
+}
+
+.related .img {
+  aspect-ratio: 432 / 280;
+}
+
+.small {
+  font-size: fl(9, 10);
+}
+
+.ko {
+  @include kr(14, 16, 400);
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 4px;
+}
+
+.en {
+  @include serif(24, 30);
+  letter-spacing: -0.005em;
+}
+
+.related .en {
+  font-size: fl(22, 28);
+}
+
+.sub {
+  @include kr(13, 14);
+  color: c(ink-soft);
+}

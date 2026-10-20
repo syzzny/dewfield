@@ -1,0 +1,39 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid c(ink);
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    background 0.25s $ease,
+    color 0.25s $ease;
+
+  &:hover:not(.selected) {
+    background: c(ink, 0.06);
+  }
+}
+
+.m {
+  padding: 10px 18px;
+  @include kr(13, 13, 400);
+}
+
+.s {
+  padding: 7px 14px;
+  @include kr(12, 13);
+}
+
+.selected {
+  background: c(olive-dark);
+  border-color: c(olive-dark);
+  color: c(cream);
+}
+
+.icon {
+  @include label;
+  font-size: 10px;
+}

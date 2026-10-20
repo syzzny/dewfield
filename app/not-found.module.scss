@@ -1,0 +1,78 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.page {
+  position: relative;
+  min-height: fl(844, 900);
+  overflow: hidden;
+  color: c(cream);
+}
+
+.bg {
+  @include cover;
+}
+
+.shade {
+  @include cover;
+  background: rgba(23, 31, 20, 0.4);
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: fl(16, 24);
+  padding: fl(120, 136) fl(20, 48) fl(32, 72);
+  min-height: inherit;
+  justify-content: flex-end;
+}
+
+.code {
+  @include serif(180, 340, 0.8);
+  letter-spacing: -0.08em;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+
+  @include down($bp-md) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+}
+
+.title {
+  @include serif(44, 64, 0.95);
+  letter-spacing: -0.02em;
+  @include accent(sage);
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  text-align: right;
+  @include kr(14, 16, 300, 1.75);
+
+  @include down($bp-md) {
+    align-items: stretch;
+    text-align: left;
+  }
+}
+
+.btn {
+  @include down($bp-md) {
+    justify-content: space-between;
+  }
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none;
+  }
+}

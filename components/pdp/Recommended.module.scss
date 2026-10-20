@@ -1,0 +1,64 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  @include section(24, 140, 80, 160);
+  @include stack(28, 56);
+}
+
+.head {
+  @include down($bp-md) {
+    p {
+      display: none;
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+
+  @include down($bp-md) {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: -20px;
+    padding-inline: 20px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.tile {
+  @include down($bp-md) {
+    flex: 0 0 169px;
+    scroll-snap-align: start;
+  }
+}
+
+.pager {
+  display: flex;
+  gap: 5px;
+  margin-top: -8px;
+
+  i {
+    width: 7px;
+    height: 2px;
+    background: c(ink, 0.3);
+    transition: width 0.3s $ease;
+  }
+
+  .on {
+    width: 22px;
+    background: c(ink);
+  }
+
+  @include up($bp-md) {
+    display: none;
+  }
+}

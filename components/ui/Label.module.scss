@@ -1,0 +1,19 @@
+@use 'mixins' as *;
+
+.label {
+  @include label;
+  white-space: pre-line;
+}
+
+.soft {
+  opacity: 0.5;
+}
+.olive {
+  color: c(olive);
+}
+.sage {
+  color: c(sage);
+}
+.cream {
+  color: c(cream);
+}

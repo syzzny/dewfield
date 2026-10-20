@@ -1,0 +1,133 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.banner {
+  position: relative;
+  height: fl(720, 960);
+  overflow: hidden;
+  background: c(olive-dark);
+  color: c(cream);
+}
+
+.bg {
+  @include cover;
+
+  img {
+    @include down($bp-md) {
+      object-position: 30% 50%;
+    }
+  }
+}
+
+.shade {
+  @include cover;
+  background: linear-gradient(90deg, rgba(23, 31, 20, 0.75) 0%, rgba(23, 31, 20, 0.15) 55%, rgba(23, 31, 20, 0) 100%);
+
+  @include down($bp-md) {
+    background: linear-gradient(
+      180deg,
+      rgba(23, 31, 20, 0.85) 0%,
+      rgba(23, 31, 20, 0.2) 45%,
+      rgba(23, 31, 20, 0.35) 100%
+    );
+  }
+}
+
+.label {
+  position: absolute;
+  top: 44px;
+  left: 48px;
+
+  @include down($bp-md) {
+    top: 40px;
+    left: 28px;
+  }
+}
+
+.aside {
+  position: absolute;
+  top: 44px;
+  right: 48px;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.copy {
+  position: absolute;
+  top: 130px;
+  left: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 420px;
+
+  @include down($bp-md) {
+    top: 70px;
+    left: 28px;
+    width: auto;
+    right: 28px;
+    gap: 14px;
+  }
+}
+
+.title {
+  font-weight: 300;
+  @include kr(28, 40, 300, 1.4);
+  letter-spacing: -0.025em;
+  white-space: pre-line;
+}
+
+.body {
+  @include kr(13, 15, 300, 1.75);
+  white-space: pre-line;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(247, 244, 238, 0.35);
+
+  @include down($bp-md) {
+    padding-bottom: 0;
+    border: 0;
+    // 모바일은 마지막 문장만
+    white-space: normal;
+  }
+}
+
+.facts {
+  display: flex;
+  gap: 40px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.factValue {
+  @include serif(32);
+}
+
+.factLabel {
+  @include kr(12);
+}
+
+.number {
+  position: absolute;
+  left: fl(4, 12);
+  bottom: fl(-40, -60);
+  @include serif(340, 720, 0.8);
+  letter-spacing: -0.08em;
+  opacity: 0.95;
+
+  em {
+    font-size: 0.333em;
+    font-style: italic;
+    color: c(sage);
+    letter-spacing: 0;
+  }
+}

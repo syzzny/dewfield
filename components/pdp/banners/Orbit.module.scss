@@ -1,0 +1,222 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  min-height: 960px;
+  padding: 56px 48px 120px;
+  background: c(paper-2);
+  overflow: hidden;
+
+  @include down($bp-md) {
+    align-items: stretch;
+    min-height: 0;
+    padding: 72px 20px 80px;
+  }
+}
+
+.label {
+  position: absolute;
+  top: 48px;
+  left: 48px;
+
+  @include down($bp-md) {
+    position: static;
+    padding-top: 12px;
+    border-top: 1px solid c(ink, 0.5);
+  }
+}
+
+.title {
+  @include serif(52, 80);
+  letter-spacing: -0.02em;
+  text-align: center;
+  @include accent;
+
+  @include down($bp-md) {
+    text-align: left;
+    line-height: 0.92;
+  }
+}
+
+.orbit {
+  position: relative;
+  width: 720px;
+  aspect-ratio: 1;
+  margin-top: 30px;
+
+  @include down($bp-md) {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+.ring {
+  @include cover;
+  border: 1px dashed c(ink, 0.25);
+  border-radius: 50%;
+
+  @include down($bp-md) {
+    inset: 3%;
+    width: auto;
+    height: auto;
+  }
+}
+
+.circle {
+  position: absolute;
+  inset: 8.33%;
+  border-radius: 50%;
+  background: c(paper);
+
+  @include down($bp-md) {
+    inset: 17%;
+  }
+}
+
+// 상태 라벨 — 데스크톱: 원 바깥 좌우 / 모바일: 원 위에 작은 알약
+.state {
+  position: absolute;
+  display: flex;
+  align-items: center;
+
+  &[data-i='0'],
+  &[data-i='3'] {
+    right: calc(100% - 7.5%);
+    flex-direction: row-reverse;
+    text-align: right;
+
+    .text {
+      align-items: flex-end;
+    }
+  }
+
+  &[data-i='1'],
+  &[data-i='2'] {
+    left: calc(100% - 7.5%);
+  }
+
+  &[data-i='0'],
+  &[data-i='1'] {
+    top: calc(25% - 5px);
+  }
+
+  &[data-i='2'],
+  &[data-i='3'] {
+    top: calc(75% - 5px);
+  }
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 50%;
+  background: c(olive);
+}
+
+.stem {
+  width: 100px;
+  height: 1px;
+  flex: none;
+  background: c(ink, 0.4);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-inline: 16px;
+  transform: translateY(calc(-50% + 5px));
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.en {
+  @include serif(15, 34);
+}
+
+.desc {
+  @include kr(13);
+  color: c(ink-soft);
+  white-space: nowrap;
+}
+
+@include down($bp-md) {
+  .state {
+    &[data-i] {
+      left: 50%;
+      right: auto;
+      flex-direction: row;
+      transform: translateX(-50%);
+    }
+
+    &[data-i='0'] {
+      top: 0;
+    }
+    &[data-i='1'] {
+      top: 50%;
+      left: auto;
+      right: 0;
+      transform: translateY(-50%);
+    }
+    &[data-i='2'] {
+      top: auto;
+      bottom: 0;
+    }
+    &[data-i='3'] {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+  }
+
+  .dot,
+  .stem,
+  .desc,
+  .head > span:first-child {
+    display: none;
+  }
+
+  .text {
+    margin: 0;
+    padding: 5px 10px;
+    background: c(paper);
+    border: 1px solid c(ink, 0.2);
+    transform: none;
+  }
+
+  .en {
+    font-style: italic;
+  }
+}
+
+// ---------- motion: 점선 궤도가 천천히 돌고, 상태 라벨이 순서대로 나타나요 ----------
+.ring {
+  animation: orbit 90s linear infinite;
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+:global(.motion-ready) .orbit {
+  .state {
+    opacity: 0;
+    transition: opacity 0.9s ease var(--d);
+  }
+
+  &:global(.is-in) .state {
+    opacity: 1;
+  }
+}

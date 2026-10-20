@@ -1,0 +1,123 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: fl(48, 80);
+  padding: fl(64, 96) fl(20, 48) 0;
+  background: c(olive-dark);
+  color: c(cream);
+  overflow: hidden;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 48px;
+
+  @include down($bp-md) {
+    flex-direction: column;
+  }
+}
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: fl(16, 20);
+  width: 100%;
+  max-width: 420px;
+
+  @include down($bp-md) {
+    max-width: none;
+  }
+}
+
+.pitch {
+  @include kr(20, 24, 300, 1.5);
+  letter-spacing: -0.01em;
+}
+
+.email {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid c(cream);
+
+  input {
+    flex: 1;
+    min-width: 0;
+    @include kr(14);
+
+    &::placeholder {
+      color: c(cream);
+    }
+  }
+
+  button {
+    @include label;
+  }
+}
+
+.links {
+  display: flex;
+  gap: 96px;
+
+  @include down($bp-md) {
+    gap: 0;
+
+    .group {
+      flex: 1;
+    }
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: fl(12, 14);
+
+  a {
+    @include kr(13, 15);
+    transition: opacity 0.3s $ease;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  padding-top: fl(16, 20);
+  border-top: 1px solid c(cream, $line-opacity);
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.wordmark {
+  @include serif(128, 440, 1);
+  letter-spacing: -0.04em;
+  color: c(olive);
+  text-align: center;
+  white-space: nowrap;
+  // 아래가 살짝 잘리도록
+  margin-bottom: -0.12em;
+}
+
+.mobileOnly {
+  @include up($bp-md) {
+    display: none !important;
+  }
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none !important;
+  }
+}

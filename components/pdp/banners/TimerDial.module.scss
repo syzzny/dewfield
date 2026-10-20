@@ -1,0 +1,220 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.banner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: 860px;
+  padding: 120px 48px;
+  background: c(olive-dark);
+  color: c(cream);
+  overflow: hidden;
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    min-height: 0;
+    padding: 88px 20px 72px;
+  }
+}
+
+.label {
+  position: absolute;
+  top: fl(40, 48);
+  left: fl(20, 48);
+}
+
+.dial {
+  position: relative;
+  justify-self: center;
+  width: min(600px, 100%);
+  aspect-ratio: 1;
+
+  @include up($bp-md) {
+    margin-left: 132px;
+    justify-self: start;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+}
+
+.ticks60,
+.ticks12 {
+  fill: none;
+  stroke: c(cream);
+}
+
+// pathLength로 원 둘레를 60(또는 12)으로 정규화 → dasharray 한 칸 = 눈금 하나
+.ticks60 {
+  stroke-width: 12;
+  stroke-opacity: 0.4;
+  stroke-dasharray: 0.04 0.96;
+}
+
+.ticks12 {
+  stroke-width: 24;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 0.016 0.984;
+}
+
+.arc {
+  fill: none;
+  stroke: c(sage);
+  stroke-width: 9;
+}
+
+.end {
+  fill: c(sage);
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: fl(8, 20);
+}
+
+.big {
+  @include serif(96, 200, 0.8);
+  letter-spacing: -0.04em;
+}
+
+.mark {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  &[data-at='0'] {
+    left: 50%;
+    bottom: 100%;
+    align-items: center;
+    transform: translate(-50%, -8px);
+  }
+
+  &[data-at='10'] {
+    left: 100%;
+    top: 46%;
+    margin-left: 50px;
+  }
+
+  &[data-at='30'] {
+    left: 50%;
+    top: 100%;
+    align-items: center;
+    transform: translate(-50%, 24px);
+  }
+
+  @include down($bp-md) {
+    &[data-at='10'] {
+      display: none;
+    }
+    &[data-at='0'] {
+      display: none;
+    }
+    &[data-at='30'] {
+      transform: translate(-50%, 16px);
+    }
+  }
+}
+
+.markTitle {
+  @include serif(22, 28);
+}
+
+.markText {
+  @include kr(12, 13);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 300px;
+
+  @include up($bp-md) {
+    justify-self: end;
+    margin-right: 90px;
+  }
+
+  @include down($bp-md) {
+    max-width: none;
+    margin-top: 32px;
+  }
+}
+
+.title {
+  @include serif(40, 60, 0.95);
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+  @include accent(sage);
+}
+
+.body {
+  @include kr(13, 16, 300, 1.8);
+  white-space: pre-line;
+}
+
+.facts {
+  display: flex;
+  gap: 40px;
+  padding-top: 16px;
+  border-top: 1px solid c(cream);
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.factValue {
+  @include serif(36, 44);
+}
+
+.factLabel {
+  @include kr(12);
+}
+
+// ---------- motion: 30초 호가 시계방향으로 차오르고, 눈금이 먼저 나타나요 ----------
+:global(.motion-ready) .dial {
+  .ticks60,
+  .ticks12 {
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+
+  .arc {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 2.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+  }
+
+  .end,
+  .mark {
+    opacity: 0;
+    transition: opacity 0.8s ease 2.4s;
+  }
+
+  &:global(.is-in) {
+    .ticks60,
+    .ticks12,
+    .end,
+    .mark {
+      opacity: 1;
+    }
+
+    .arc {
+      stroke-dashoffset: 0;
+    }
+  }
+}

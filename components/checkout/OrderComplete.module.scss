@@ -1,0 +1,125 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.wrap {
+  display: flex;
+
+  @include down($bp-md) {
+    flex-direction: column;
+  }
+}
+
+.img {
+  width: 44.4%;
+  flex: none;
+  min-height: 900px;
+
+  @include down($bp-md) {
+    width: 100%;
+    min-height: 0;
+    height: 320px;
+  }
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: fl(22, 32);
+  max-width: 800px;
+  padding: fl(32, 72) fl(20, 48) fl(48, 72) fl(20, 80);
+}
+
+.title {
+  @include serif(64, 120, 0.9);
+  letter-spacing: -0.04em;
+  @include accent;
+}
+
+.lead {
+  @include kr(14, 16, 300, 1.75);
+  color: c(ink-soft);
+}
+
+.info {
+  border-bottom: 1px solid c(ink);
+
+  div {
+    display: flex;
+    gap: 24px;
+    padding-block: fl(14, 16);
+    border-top: 1px solid c(ink);
+
+    @include down($bp-md) {
+      justify-content: space-between;
+    }
+  }
+
+  dt {
+    width: 140px;
+    @include kr(13, 14);
+    color: c(ink-soft);
+
+    @include down($bp-md) {
+      width: auto;
+    }
+  }
+
+  dd {
+    @include kr(13, 15, 400);
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.tip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: fl(16, 20) fl(18, 24);
+  background: c(paper-2);
+  @include kr(13, 14);
+
+  em {
+    @include serif(18, 22);
+    font-style: italic;
+    color: c(olive);
+    white-space: nowrap;
+  }
+
+  span {
+    flex: 1;
+  }
+
+  strong {
+    @include kr(13, 13, 500);
+    color: c(olive);
+    white-space: nowrap;
+  }
+
+  @include down($bp-md) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none !important;
+  }
+}
+
+.mobileOnly {
+  @include up($bp-md) {
+    display: none !important;
+  }
+}

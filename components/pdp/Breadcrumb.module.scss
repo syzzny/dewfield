@@ -1,0 +1,24 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.bar {
+  @include container;
+  display: flex;
+  justify-content: space-between;
+  padding-block: 24px;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.trail {
+  display: flex;
+  gap: 8px;
+  @include kr(12);
+  color: c(ink-soft);
+
+  a:hover {
+    color: c(ink);
+  }
+}

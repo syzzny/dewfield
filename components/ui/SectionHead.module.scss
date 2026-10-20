@@ -1,0 +1,72 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+
+  @include down($bp-md) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: fl(20, 24);
+  }
+}
+
+.title {
+  font-family: $font-serif;
+  font-weight: 400;
+  @include accent;
+}
+
+.xl {
+  @include serif(60, 140, 0.88);
+  letter-spacing: -0.04em;
+}
+.l {
+  @include serif(60, 120, 0.9);
+  letter-spacing: -0.03em;
+}
+.m {
+  @include serif(52, 110, 0.92);
+  letter-spacing: -0.03em;
+}
+.s {
+  @include serif(48, 96, 0.92);
+  letter-spacing: -0.03em;
+}
+.xs {
+  @include serif(40, 72, 0.95);
+  letter-spacing: -0.02em;
+}
+
+.body {
+  @include kr(14, 16, 300, 1.8);
+  color: c(ink-soft);
+  white-space: pre-line;
+
+  @include down($bp-md) {
+    br {
+      display: none;
+    }
+  }
+}
+
+.dark {
+  color: c(cream);
+
+  em {
+    color: c(sage);
+  }
+
+  .body {
+    color: c(cream);
+  }
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

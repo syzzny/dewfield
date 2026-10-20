@@ -1,0 +1,16 @@
+@use 'mixins' as *;
+
+// :where()로 감싸 우선순위를 0으로 낮춰요.
+// 부모 컴포넌트가 className으로 position · 크기를 지정하면, CSS 로드 순서와 상관없이 항상 그쪽이 이겨요.
+// (개발 서버에서는 CSS 로드 순서가 빌드와 달라 이미지 프레임 높이가 0이 되는 문제가 있었어요.)
+:where(.frame) {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: c(paper-2);
+}
+
+.frame img {
+  @include cover;
+  object-fit: cover;
+}

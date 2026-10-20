@@ -1,0 +1,145 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  @include section;
+  @include stack(28, 64);
+}
+
+.body {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+
+  @include down($bp-md) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+  }
+}
+
+.swatch {
+  position: relative;
+  width: 49%;
+  flex: none;
+  aspect-ratio: 1;
+  background: c(paper);
+
+  @include down($bp-md) {
+    width: 100%;
+  }
+}
+
+.img {
+  height: 100%;
+  background: transparent;
+}
+
+.lines {
+  @include cover;
+  fill: none;
+  stroke: c(ink);
+  stroke-width: 1;
+
+  circle {
+    fill: c(ink);
+    stroke: none;
+  }
+}
+
+.callout0,
+.callout1 {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.callout0 {
+  top: 14.5%;
+  left: 81%;
+  transform: translateX(-50%);
+}
+
+.callout1 {
+  top: 80.5%;
+  left: 13.5%;
+  transform: translateX(-50%);
+}
+
+.calloutTitle {
+  @include serif(20, 26);
+  white-space: nowrap;
+}
+
+.calloutText {
+  @include kr(11, 13);
+  color: c(ink-soft);
+  white-space: nowrap;
+}
+
+.list {
+  flex: 1;
+  border-bottom: 1px solid c(ink, $line-opacity);
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: fl(16, 28);
+    padding-block: fl(16, 26);
+    @include hairline;
+  }
+}
+
+.value {
+  width: fl(64, 110);
+  flex: none;
+  @include serif(30, 48);
+  letter-spacing: -0.01em;
+  color: c(olive);
+}
+
+.info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nameRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+
+  @include down($bp-md) {
+    justify-content: space-between;
+  }
+}
+
+.ko {
+  @include kr(15, 17, 400);
+}
+
+.text {
+  @include kr(14, 14, 300, 1.7);
+  color: c(ink-soft);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+// ---------- motion: 콜아웃 선이 점에서부터 그어져요 ----------
+:global(.motion-ready) .lines {
+  polyline {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+  }
+
+  &:global(.is-in) polyline {
+    stroke-dashoffset: 0;
+  }
+}

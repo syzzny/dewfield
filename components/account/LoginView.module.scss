@@ -1,0 +1,157 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 880px;
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+}
+
+.visual {
+  position: relative;
+  min-height: 100%;
+  color: c(cream);
+
+  @include down($bp-md) {
+    min-height: 280px;
+  }
+}
+
+.img {
+  @include cover;
+}
+
+.shade {
+  @include cover;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 33, 23, 0.35) 0%,
+    rgba(26, 33, 23, 0) 16%,
+    rgba(26, 33, 23, 0) 45%,
+    rgba(26, 33, 23, 0.7) 100%
+  );
+}
+
+.label {
+  position: absolute;
+  top: fl(24, 40);
+  left: fl(20, 48);
+}
+
+.welcome {
+  position: absolute;
+  left: fl(20, 48);
+  bottom: fl(24, 48);
+  @include serif(44, 96, 0.9);
+  letter-spacing: -0.03em;
+  @include accent(sage);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: fl(22, 32);
+  width: 100%;
+  max-width: 720px;
+  padding: fl(40, 96) fl(20, 120);
+}
+
+.title {
+  @include serif(56, 96, 0.9);
+  letter-spacing: -0.03em;
+  @include accent;
+}
+
+.lead {
+  @include kr(14, 15);
+  color: c(ink-soft);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @include kr(13, 14);
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  input:checked + .box {
+    background: c(olive-dark);
+    border-color: c(olive-dark);
+  }
+}
+
+.box {
+  width: 16px;
+  height: 16px;
+  border: 1px solid c(ink);
+}
+
+.find {
+  padding-bottom: 2px;
+  border-bottom: 1px solid c(ink);
+  @include kr(13);
+  color: c(ink-soft);
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  i {
+    flex: 1;
+    height: 1px;
+    background: c(ink);
+  }
+}
+
+.social {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+
+  button {
+    padding-block: 16px;
+    border: 1px solid c(ink);
+    @include kr(12, 13, 400);
+    transition: background 0.2s;
+
+    &:hover {
+      background: c(ink, 0.06);
+    }
+  }
+
+  @include down($bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.join {
+  @include kr(13, 14);
+  color: c(ink-soft);
+  text-align: center;
+
+  a {
+    margin-left: 6px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid c(ink);
+    color: c(ink);
+    font-weight: 400;
+  }
+}

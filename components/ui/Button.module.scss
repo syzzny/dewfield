@@ -1,0 +1,63 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-height: fl(52, 62);
+  padding: 0 fl(22, 28);
+  @include kr(14, 15, 500);
+  transition:
+    background-color 0.3s $ease,
+    color 0.3s $ease,
+    border-color 0.3s $ease;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.trailing {
+  @include label(11, 12);
+  font-family: $font-sans;
+}
+
+.caps .text {
+  @include label(11, 12);
+}
+
+.block {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.primary {
+  background: c(olive-dark);
+  color: c(cream);
+
+  &:hover:not(:disabled) {
+    background: c(olive);
+  }
+}
+
+.secondary {
+  border: 1px solid c(ink);
+  color: c(ink);
+
+  &:hover:not(:disabled) {
+    background: c(ink);
+    color: c(cream);
+  }
+}
+
+.light {
+  background: c(cream);
+  color: c(ink);
+
+  &:hover:not(:disabled) {
+    background: c(sage);
+  }
+}

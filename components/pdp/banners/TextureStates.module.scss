@@ -1,0 +1,141 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 820px;
+  padding: 40px 48px;
+
+  @include down($bp-md) {
+    min-height: 0;
+    padding: 0;
+    background: c(paper);
+  }
+}
+
+.bg {
+  @include cover;
+
+  @include down($bp-md) {
+    position: relative;
+    height: 300px;
+    order: 0;
+  }
+}
+
+.fade {
+  @include cover;
+  background: linear-gradient(180deg, rgba(242, 240, 232, 0.85) 0%, rgba(242, 240, 232, 0) 45%);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.head {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @include down($bp-md) {
+    order: 1;
+    padding: 32px 20px 20px;
+
+    > span:first-child {
+      display: none;
+    }
+  }
+}
+
+.title {
+  @include serif(40, 110);
+  letter-spacing: -0.03em;
+  @include accent;
+}
+
+.states {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+
+  li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 20px 20px;
+    background: rgba(247, 245, 237, 0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    // 카드 사이 세로선
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: -24px;
+      bottom: 0;
+      width: 1px;
+      height: 300px;
+      background: rgba(247, 244, 238, 0.6);
+    }
+  }
+
+  @include down($bp-md) {
+    order: 2;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 20px 72px;
+
+    li {
+      flex-direction: row;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px 14px;
+      padding: 14px 0;
+      background: none;
+      backdrop-filter: none;
+      @include hairline;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+.stateHead {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.en {
+  @include serif(24, 34);
+
+  @include down($bp-md) {
+    width: 90px;
+  }
+}
+
+.ko {
+  @include kr(13, 15, 400);
+
+  @include down($bp-md) {
+    font-weight: 300;
+    color: c(ink-soft);
+  }
+}
+
+.text {
+  @include kr(13);
+  color: c(ink-soft);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}

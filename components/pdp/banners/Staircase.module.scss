@@ -1,0 +1,105 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.banner {
+  position: relative;
+  @include container;
+  padding-top: fl(72, 48);
+  padding-bottom: fl(80, 49);
+  min-height: fl(0, 1000);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px 32px;
+
+  > span {
+    grid-column: 1 / -1;
+  }
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-top: 12px;
+    border-top: 1px solid c(ink, 0.5);
+  }
+}
+
+.title {
+  @include serif(52, 120, 0.9);
+  letter-spacing: -0.04em;
+  @include accent;
+}
+
+.body {
+  align-self: start;
+  margin-top: 54px;
+  @include kr(14, 16, 300, 1.8);
+  color: c(ink-soft);
+  white-space: pre-line;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+// 이미지 높이가 240 → 350 → 460 → 570으로 커지며 바닥을 맞춰요.
+.stairs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: end;
+  gap: 32px;
+  margin-top: -40px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  @include down($bp-lg) {
+    margin-top: 48px;
+  }
+
+  @include down($bp-md) {
+    gap: 6px;
+    margin-top: 32px;
+  }
+}
+
+.stepHead {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid c(ink);
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 6px;
+  }
+}
+
+.no {
+  @include serif(28, 56, 0.9);
+  color: c(olive);
+}
+
+.en {
+  @include serif(14, 30);
+}
+
+.img {
+  height: calc(#{fl(110, 240)} + var(--i) * #{fl(50, 110)});
+}
+
+.text {
+  @include kr(13);
+  color: c(ink-soft);
+
+  @include down($bp-md) {
+    display: none;
+  }
+}

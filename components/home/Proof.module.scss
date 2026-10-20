@@ -1,0 +1,71 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: c(paper-2);
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.img {
+  min-height: 100%;
+  aspect-ratio: 720 / 1000;
+
+  @include down($bp-md) {
+    aspect-ratio: 390 / 460;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: fl(24, 40);
+  padding: fl(40, 120) fl(20, 48) fl(80, 80) fl(20, 72);
+  max-width: 720px;
+}
+
+.big {
+  @include serif(120, 220, 0.8);
+  letter-spacing: -0.06em;
+}
+
+.lead {
+  @include kr(14, 17, 300, 1.7);
+  color: c(ink-soft);
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+  gap: fl(12, 16);
+  padding-top: fl(20, 32);
+  @include hairline;
+
+  p {
+    @include kr(19, 24, 300, 1.55);
+    letter-spacing: -0.015em;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  cite {
+    font-style: normal;
+  }
+}
+
+.link {
+  align-self: flex-start;
+
+  @include down($bp-md) {
+    display: none !important;
+  }
+}

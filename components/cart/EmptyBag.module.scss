@@ -1,0 +1,115 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.wrap {
+  display: flex;
+  min-height: 828px;
+
+  @include down($bp-md) {
+    flex-direction: column-reverse;
+    min-height: 0;
+  }
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 28px;
+  padding: 48px 72px 64px 48px;
+
+  @include down($bp-md) {
+    gap: 16px;
+    padding: 28px 20px 72px;
+  }
+}
+
+.index {
+  @include down($bp-md) {
+    display: none !important;
+  }
+}
+
+.mobileLabel {
+  @include up($bp-md) {
+    display: none;
+  }
+}
+
+.title {
+  @include serif(56, 110, 0.9);
+  letter-spacing: -0.03em;
+  @include accent;
+}
+
+.lead {
+  @include kr(14, 17, 300, 1.75);
+  color: c(ink-soft);
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 8px;
+
+    a {
+      justify-content: space-between;
+    }
+  }
+}
+
+.recent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 24px;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.recentList {
+  display: flex;
+  gap: 12px;
+}
+
+.recentItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 20px;
+  border: 1px solid c(ink);
+  @include serif(20);
+}
+
+.recentImg {
+  width: 64px;
+  height: 80px;
+}
+
+.visual {
+  position: relative;
+  width: 39%;
+  flex: none;
+  overflow: hidden;
+
+  @include down($bp-md) {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+.img {
+  position: absolute;
+  inset: -30px;
+  height: auto;
+
+  img {
+    filter: blur(6px) saturate(0.7) !important;
+  }
+}

@@ -1,0 +1,128 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.banner {
+  position: relative;
+  height: fl(640, 900);
+  overflow: hidden;
+  color: c(cream);
+  background: c(olive-dark);
+}
+
+.bg {
+  @include cover;
+}
+
+.shade {
+  @include cover;
+  background: rgba(31, 38, 26, 0.3);
+}
+
+.grid {
+  @include cover;
+
+  i {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(242, 240, 229, 0.22);
+
+    &:nth-child(1) {
+      left: fl(20, 48);
+    }
+    &:nth-child(2) {
+      left: 33.33%;
+    }
+    &:nth-child(3) {
+      left: 66.66%;
+    }
+    &:nth-child(4) {
+      right: fl(20, 48);
+    }
+  }
+
+  b {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: rgba(242, 240, 229, 0.22);
+  }
+
+  @include down($bp-md) {
+    i:nth-child(2) {
+      left: 50%;
+    }
+    i:nth-child(3) {
+      display: none;
+    }
+  }
+}
+
+.labels {
+  position: absolute;
+  top: fl(28, 40);
+  left: fl(28, 64);
+  right: fl(28, 64);
+  display: flex;
+  justify-content: space-between;
+}
+
+.aside {
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.title {
+  font-weight: 400;
+}
+
+.l1,
+.l2 {
+  position: absolute;
+  @include serif(96, 220, 0.8);
+  letter-spacing: -0.04em;
+}
+
+.l1 {
+  top: fl(150, 200);
+  left: fl(16, 40);
+}
+
+.l2 {
+  top: fl(250, 470);
+  left: fl(90, 560);
+  font-style: italic;
+}
+
+.lead {
+  position: absolute;
+  left: fl(28, 64);
+  bottom: fl(80, 64);
+  @include kr(22, 26, 300, 1.5);
+  letter-spacing: -0.015em;
+  white-space: pre-line;
+}
+
+.body {
+  position: absolute;
+  right: fl(28, 64);
+  bottom: 64px;
+  @include kr(13, 15, 300, 1.75);
+  white-space: pre-line;
+
+  @include down($bp-md) {
+    left: 28px;
+    right: auto;
+    bottom: 40px;
+
+    // 모바일은 첫 문장만
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,124 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: fl(32, 80);
+  padding-top: fl(72, 140);
+  padding-bottom: fl(80, 160);
+}
+
+.body {
+  display: flex;
+  gap: 96px;
+
+  @include down($bp-md) {
+    display: contents;
+  }
+}
+
+.statement {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 56px;
+
+  @include down($bp-md) {
+    display: contents;
+  }
+}
+
+.quote {
+  // 디자인과 같은 줄바꿈이 나오도록 한 줄 글자 수로 폭을 잡아요.
+  max-width: 13.4em;
+  @include kr(28, 54, 300, 1.45);
+  letter-spacing: -0.03em;
+
+  em {
+    font-family: $font-serif;
+    font-size: 1.18em;
+    color: c(olive);
+    letter-spacing: -0.01em;
+  }
+}
+
+.facts {
+  display: flex;
+
+  li {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: fl(4, 8);
+    padding: fl(14, 20) 24px 0 0;
+    @include hairline;
+  }
+
+  @include down($bp-md) {
+    order: 3;
+  }
+}
+
+.value {
+  @include serif(36, 56);
+  letter-spacing: -0.01em;
+}
+
+.label {
+  @include kr(12, 14);
+  color: c(ink-soft);
+}
+
+.short {
+  display: none;
+}
+
+@include down($bp-md) {
+  .long {
+    display: none;
+  }
+  .short {
+    display: inline;
+  }
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 400px;
+  flex: none;
+  padding-top: 120px;
+
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+
+    em {
+      @include serif(15);
+      font-style: italic;
+      color: c(ink-soft);
+    }
+  }
+
+  @include down($bp-md) {
+    order: 2;
+    width: 100%;
+    padding-top: 0;
+
+    figcaption {
+      display: none;
+    }
+  }
+}
+
+.img {
+  aspect-ratio: 400 / 540;
+
+  @include down($bp-md) {
+    aspect-ratio: 350 / 420;
+  }
+}

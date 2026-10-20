@@ -1,0 +1,151 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.card {
+  display: flex;
+  background: c(olive-dark);
+  color: c(cream);
+
+  @include down($bp-md) {
+    flex-direction: column;
+  }
+}
+
+.summary {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 18px;
+  padding: fl(24, 36);
+}
+
+.title {
+  @include serif(44, 64, 0.92);
+  letter-spacing: -0.02em;
+  @include accent(sage);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  li {
+    padding: 7px 14px;
+    border: 1px solid c(cream);
+    border-radius: 999px;
+    @include kr(12);
+  }
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+  padding-top: 8px;
+
+  a {
+    padding-bottom: 3px;
+    border-bottom: 1px solid c(cream);
+    @include label;
+  }
+}
+
+.metrics {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  flex: none;
+  padding: 28px 32px;
+  background: c(paper-2);
+  color: c(ink);
+
+  @include down($bp-md) {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-block: 14px;
+
+  & + & {
+    border-top: 1px solid rgba(28, 35, 28, 0.12);
+  }
+}
+
+.metricLabel {
+  width: 46px;
+  @include kr(13, 13, 400);
+}
+
+.track {
+  position: relative;
+  flex: 1;
+  height: 6px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 3px;
+    height: 1px;
+    background: rgba(28, 35, 28, 0.15);
+  }
+
+  i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.fill {
+  left: 0;
+  width: calc(var(--v) * 100%);
+  height: 3px;
+  background: c(olive);
+}
+
+.prev {
+  left: calc(var(--p) * 100%);
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  border-radius: 50%;
+  border: 1px solid rgba(28, 35, 28, 0.4);
+}
+
+.knob {
+  left: calc(var(--v) * 100%);
+  width: 9px;
+  height: 9px;
+  margin-left: -4.5px;
+  border-radius: 50%;
+  background: c(olive);
+}
+
+.value {
+  width: 28px;
+  @include serif(20);
+}
+
+.delta {
+  width: 24px;
+  @include kr(11, 11, 400);
+  color: c(ink-soft);
+}
+
+.good {
+  color: c(olive);
+}
+
+.note {
+  padding-top: 8px;
+  @include kr(12);
+  color: c(ink-soft);
+}

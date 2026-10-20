@@ -1,0 +1,157 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.banner {
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  aspect-ratio: 1440 / 560;
+
+  @include down($bp-md) {
+    aspect-ratio: 390 / 320;
+  }
+}
+
+.inner {
+  @include section(40, 72, 80, 120);
+  @include stack(24, 40);
+}
+
+.index {
+  @include down($bp-md) {
+    display: none !important;
+  }
+}
+
+.title {
+  @include serif(44, 96, 0.92);
+  letter-spacing: -0.03em;
+  @include accent;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+
+  thead th {
+    padding-bottom: 14px;
+    border-bottom: 1px solid c(ink);
+    font-weight: 400;
+  }
+
+  tbody th,
+  tbody td {
+    padding-block: 28px;
+    border-bottom: 1px solid c(ink);
+    vertical-align: middle;
+  }
+
+  tbody th {
+    width: 240px;
+    font-weight: 400;
+  }
+
+  td {
+    @include kr(14);
+  }
+}
+
+.rowTitle {
+  display: block;
+  @include serif(28, 40);
+}
+
+.evening .rowTitle {
+  color: c(olive);
+}
+
+.rowTime {
+  @include kr(12, 13);
+  color: c(ink-soft);
+}
+
+.mark {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  vertical-align: -4px;
+  border-radius: 50%;
+  background: c(olive);
+  border: 1px solid c(ink);
+}
+
+.evening .mark {
+  background: c(olive-dark);
+}
+
+.skip {
+  color: c(ink-soft);
+
+  .mark {
+    background: none;
+    border-color: c(ink, 0.3);
+  }
+}
+
+.mobileStep {
+  display: none;
+}
+
+// 모바일: 표를 카드형 목록으로
+@include down($bp-md) {
+  .table {
+    thead {
+      display: none;
+    }
+
+    tbody,
+    tr,
+    th,
+    td {
+      display: block;
+      width: auto !important;
+    }
+
+    tr {
+      padding-block: 20px;
+      border-top: 1px solid c(ink, $line-opacity);
+    }
+
+    tbody th,
+    tbody td {
+      padding: 0;
+      border: 0;
+    }
+
+    tbody th {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    td {
+      display: flex;
+      align-items: center;
+      padding-block: 6px;
+      @include kr(13);
+    }
+  }
+
+  .mark {
+    width: 12px;
+    height: 12px;
+    vertical-align: 0;
+  }
+
+  .mobileStep {
+    display: inline-block;
+    width: 72px;
+    @include serif(16);
+    color: c(ink);
+  }
+}

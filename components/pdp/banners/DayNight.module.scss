@@ -1,0 +1,281 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.banner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 620px 1fr;
+  grid-template-rows: 1fr auto;
+  min-height: 880px;
+  padding: 200px 48px 60px;
+  background: c(paper);
+  overflow: hidden;
+
+  @include down($bp-lg) {
+    grid-template-columns: 43% 1fr;
+  }
+
+  @include down($bp-md) {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 0;
+    background: c(olive-dark);
+    color: c(cream);
+  }
+}
+
+.img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(100% - 620px);
+
+  @include down($bp-lg) {
+    width: 57%;
+  }
+
+  @include down($bp-md) {
+    position: relative;
+    width: 100%;
+    height: 360px;
+  }
+}
+
+.shade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(100% - 620px);
+  background: linear-gradient(180deg, rgba(13, 18, 13, 0) 50%, rgba(13, 18, 13, 0.65) 100%);
+
+  @include down($bp-lg) {
+    width: 57%;
+  }
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.label {
+  position: absolute;
+  top: 48px;
+  left: 48px;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.day,
+.night {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-self: start;
+}
+
+.night {
+  margin-left: 260px;
+  color: c(cream);
+
+  @include down($bp-lg) {
+    margin-left: 48px;
+  }
+}
+
+.title {
+  @include serif(38, 72, 0.95);
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+  @include accent;
+}
+
+.night .title em {
+  color: c(sage);
+}
+
+.body {
+  @include kr(13, 16, 300, 1.8);
+  white-space: pre-line;
+  color: c(ink-soft);
+}
+
+.night .body {
+  color: c(cream);
+}
+
+// 모바일: 밤 카피만, 낮은 숨김 (디자인 기준)
+@include down($bp-md) {
+  .day {
+    display: none;
+  }
+
+  .night {
+    margin: 0;
+    padding: 40px 20px 0;
+    gap: 16px;
+
+    > span:first-child {
+      display: none;
+    }
+  }
+
+  .title {
+    white-space: normal;
+  }
+}
+
+// ---------- timeline ----------
+.timeline {
+  position: relative;
+  grid-column: 1 / -1;
+  height: 80px;
+  margin-top: 60px;
+
+  @include down($bp-md) {
+    margin: 24px 20px 72px;
+    height: 64px;
+  }
+}
+
+.line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    c(ink, 0.5) 0%,
+    c(ink, 0.5) 42%,
+    rgba(247, 244, 238, 0.7) 46%,
+    rgba(247, 244, 238, 0.7) 100%
+  );
+
+  @include down($bp-md) {
+    background: rgba(247, 244, 238, 0.35);
+  }
+}
+
+.hour {
+  position: absolute;
+  top: 25px;
+  left: calc(var(--p) * 100%);
+  color: c(ink);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 10px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  span {
+    position: absolute;
+    top: 19px;
+    left: 0;
+    transform: translateX(-50%);
+    font-size: 10px;
+  }
+
+  &:first-of-type span {
+    transform: none;
+  }
+
+  &:last-of-type span {
+    transform: translateX(-100%);
+  }
+
+  &[data-dark] {
+    color: c(cream);
+  }
+
+  @include down($bp-md) {
+    color: c(cream);
+
+    &:nth-of-type(even) {
+      display: none;
+    }
+  }
+}
+
+.repair {
+  position: absolute;
+  top: 27px;
+  left: calc(var(--from) * 100%);
+  width: calc((var(--to) - var(--from)) * 100%);
+  height: 6px;
+  background: c(sage);
+
+  span {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+}
+
+.morning {
+  position: absolute;
+  top: 24px;
+  left: calc(var(--p) * 100%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: c(olive);
+
+  span {
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+// ---------- motion: 하루가 왼쪽부터 흐르고, 회복 시간대가 마지막에 칠해져요 ----------
+:global(.motion-ready) .timeline {
+  .line {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hour,
+  .morning {
+    opacity: 0;
+    transition: opacity 0.6s ease calc(var(--p, 0) * 2s);
+  }
+
+  .repair {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2s;
+  }
+
+  &:global(.is-in) {
+    .line,
+    .repair {
+      transform: none;
+    }
+
+    .hour,
+    .morning {
+      opacity: 1;
+    }
+  }
+}

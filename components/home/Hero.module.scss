@@ -1,0 +1,209 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// 1440×920 / 390×780 디자인을 비율 그대로 유지하는 히어로
+.hero {
+  position: relative;
+  height: fl(780, 920);
+  min-height: 640px;
+  overflow: hidden;
+  color: c(cream);
+}
+
+.bg {
+  position: absolute;
+  inset: -30px;
+  height: auto;
+
+  img {
+    filter: blur(2px);
+  }
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 33, 23, 0.35) 0%,
+    rgba(26, 33, 23, 0.08) 48%,
+    rgba(26, 33, 23, 0.68) 100%
+  );
+}
+
+.grid {
+  position: absolute;
+  inset: fl(56, 72) 0 0;
+  pointer-events: none;
+
+  i {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(242, 240, 229, 0.22);
+
+    &:nth-child(1) {
+      left: fl(20, 48);
+    }
+    &:nth-child(2) {
+      left: 33.33%;
+    }
+    &:nth-child(3) {
+      left: 66.66%;
+    }
+    &:nth-child(4) {
+      right: fl(20, 48);
+    }
+  }
+
+  b {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: fl(374, 488);
+    height: 1px;
+    background: rgba(242, 240, 229, 0.22);
+  }
+
+  @include down($bp-md) {
+    i:nth-child(3) {
+      display: none;
+    }
+    i:nth-child(2) {
+      left: 50%;
+    }
+  }
+}
+
+.labels {
+  position: absolute;
+  top: fl(76, 104);
+  left: fl(28, 64);
+  right: fl(28, 64);
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  position: absolute;
+  inset: 0;
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.quiet,
+.skin {
+  position: absolute;
+  @include serif(128, 300, 0.8);
+  letter-spacing: -0.05em;
+}
+
+.quiet {
+  top: fl(200, 290);
+  left: fl(16, 40);
+}
+
+.skin {
+  top: fl(310, 540);
+  left: fl(150, 520);
+  font-style: italic;
+}
+
+.copy {
+  position: absolute;
+  left: fl(28, 64);
+  top: fl(470, 600);
+  display: flex;
+  flex-direction: column;
+  gap: fl(18, 22);
+  width: max-content;
+
+  @include down($bp-md) {
+    right: 28px;
+    width: auto;
+  }
+}
+
+.lead {
+  white-space: nowrap;
+  @include kr(24, 30, 300, 1.45);
+  letter-spacing: -0.02em;
+}
+
+.body {
+  @include kr(14, 15, 300, 1.75);
+}
+
+.desktopLink {
+  align-self: flex-start;
+}
+
+.mobileCta {
+  display: none !important;
+}
+
+.card {
+  position: absolute;
+  right: 48px;
+  bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 250px;
+  padding: 14px 14px 20px;
+  background: c(cream);
+  color: c(ink);
+  transition: transform 0.6s $ease;
+
+  &:hover,
+  &:global(.is-in):hover {
+    transform: translateY(-6px);
+  }
+}
+
+.cardImg {
+  height: 250px;
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardName {
+  @include serif(22);
+}
+
+.cardMeta {
+  @include kr(12);
+  color: c(ink-soft);
+}
+
+.scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+}
+
+.mobileOnly {
+  display: none;
+}
+
+@include down($bp-md) {
+  .desktopOnly,
+  .desktopLink,
+  .card,
+  .scroll {
+    display: none !important;
+  }
+
+  .mobileOnly {
+    display: inline;
+  }
+
+  .mobileCta {
+    display: flex !important;
+  }
+}

@@ -1,0 +1,169 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.banner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  align-items: start;
+  gap: 48px;
+  min-height: 1000px;
+  padding: 180px 100px 120px 48px;
+  background: c(olive-dark);
+  color: c(cream);
+  overflow: hidden;
+
+  @include down($bp-lg) {
+    padding-right: 48px;
+  }
+
+  @include down($bp-md) {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    min-height: 0;
+    padding: 72px 20px 80px;
+    background: c(paper-2);
+    color: c(ink);
+  }
+}
+
+.label {
+  position: absolute;
+  top: 48px;
+  left: 48px;
+
+  @include down($bp-md) {
+    position: static;
+    padding-top: 12px;
+    border-top: 1px solid c(ink, 0.5);
+    color: c(ink);
+  }
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  @include serif(52, 96, 0.92);
+  letter-spacing: -0.03em;
+  @include accent(sage);
+
+  @include down($bp-md) {
+    em {
+      color: c(olive);
+    }
+  }
+}
+
+.body {
+  @include kr(14, 16, 300, 1.8);
+  white-space: pre-line;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.receipt {
+  display: flex;
+  flex-direction: column;
+  padding: fl(28, 44) fl(24, 40);
+  background: #faf7f2;
+  color: c(ink);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+  transform: rotate(-2deg);
+
+  @include down($bp-md) {
+    margin-inline: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  hr {
+    margin-block: 14px;
+    border: 0;
+    border-top: 1px dashed c(ink, 0.5);
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 7px;
+    @include kr(13, 14);
+  }
+}
+
+.brand {
+  @include serif(28, 36);
+  text-align: center;
+}
+
+.order {
+  text-align: center;
+  font-size: 10px;
+}
+
+.num {
+  @include price(14);
+  white-space: nowrap;
+}
+
+.muted {
+  color: c(ink-soft);
+}
+
+.accent {
+  color: c(olive);
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  @include serif(26, 40);
+
+  span:last-child {
+    @include price-display(26, 40);
+  }
+}
+
+.thanks {
+  margin-top: 16px;
+  @include serif(18);
+  font-style: italic;
+  color: c(olive);
+  text-align: center;
+}
+
+.barcode {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  height: 32px;
+  margin-top: 16px;
+
+  i {
+    background: c(ink);
+  }
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+// ---------- motion: 영수증이 아래에서 올라오며 비스듬히 내려앉아요 ----------
+:global(.motion-ready) .receipt {
+  opacity: 0;
+  transform: translateY(80px) rotate(-7deg);
+  transition:
+    opacity 1s ease,
+    transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:global(.is-in) {
+    opacity: 1;
+    transform: rotate(-2deg);
+  }
+}

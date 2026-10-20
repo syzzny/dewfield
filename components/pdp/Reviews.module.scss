@@ -1,0 +1,186 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.section {
+  background: c(paper-2);
+}
+
+.inner {
+  @include section(72, 140, 80, 140);
+  @include stack(28, 72);
+  align-items: flex-start;
+
+  > :not(a) {
+    align-self: stretch;
+  }
+}
+
+.top {
+  display: flex;
+  gap: 96px;
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 28px;
+  }
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include down($bp-md) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.big {
+  @include serif(110, 220, 0.8);
+  letter-spacing: -0.06em;
+}
+
+.scoreMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  @include kr(12, 12, 300, 1.6);
+  color: c(ink-soft);
+}
+
+.quote {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 24px;
+
+  cite {
+    font-style: normal;
+  }
+
+  @include down($bp-md) {
+    gap: 12px;
+  }
+}
+
+.quoteText {
+  @include kr(20, 34, 300, 1.5);
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+
+  @include down($bp-md) {
+    white-space: normal;
+  }
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 14px;
+    @include hairline;
+  }
+
+  // 모바일: 알약 칩
+  @include down($bp-md) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+
+    li {
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid c(ink);
+      border-radius: 999px;
+    }
+  }
+}
+
+.factValue {
+  @include serif(12, 40);
+
+  @include down($bp-md) {
+    font-family: $font-sans;
+    color: c(olive);
+  }
+}
+
+.factLabel {
+  @include kr(12, 13);
+  color: c(ink-soft);
+
+  @include down($bp-md) {
+    color: c(ink);
+  }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 24px;
+    border-top: 1px solid c(ink, 0.35);
+  }
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+    gap: 0;
+
+    li {
+      gap: 8px;
+      padding-block: 18px;
+      border-top-color: c(ink, $line-opacity);
+    }
+
+    li:nth-child(n + 3) {
+      display: none;
+    }
+  }
+}
+
+.title {
+  @include kr(16, 18, 400);
+}
+
+.body {
+  @include kr(13, 14, 300, 1.75);
+  color: c(ink-soft);
+}
+
+.author {
+  font-size: fl(9, 10);
+}
+
+.mobileAll {
+  justify-content: center;
+
+  @include up($bp-md) {
+    display: none !important;
+  }
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none !important;
+  }
+}
+
+.mobileOnly {
+  @include up($bp-md) {
+    display: none;
+  }
+}

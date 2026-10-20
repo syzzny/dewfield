@@ -1,0 +1,168 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.banner {
+  background: c(olive-dark);
+  color: c(cream);
+}
+
+.inner {
+  @include section(72, 120, 80, 120);
+  @include stack(28, 64);
+}
+
+.scale {
+  position: relative;
+  height: fl(120, 200);
+  margin-inline: 6px;
+}
+
+.track,
+.fill {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1px;
+}
+
+.track {
+  right: 0;
+  background: rgba(247, 244, 238, 0.4);
+}
+
+.fill {
+  width: calc(var(--pos) * 100%);
+  height: 3px;
+  margin-top: -1px;
+  background: c(sage);
+}
+
+.step {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--p) * 100%);
+
+  i {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: c(olive-dark);
+    border: 1px solid rgba(247, 244, 238, 0.6);
+    transform: translate(-50%, -50%);
+  }
+
+  &[data-on] i {
+    background: c(sage);
+  }
+
+  span {
+    position: absolute;
+    top: 24px;
+    transform: translateX(-50%);
+    @include serif(15, 26);
+    white-space: nowrap;
+  }
+
+  &:first-of-type span {
+    transform: none;
+  }
+
+  &:last-of-type span {
+    transform: translateX(-100%);
+  }
+}
+
+.marker {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--pos) * 100%);
+  width: fl(20, 30);
+  height: fl(20, 30);
+  border-radius: 50%;
+  background: c(cream);
+  border: 4px solid c(sage);
+  transform: translate(-50%, -50%);
+}
+
+.markerTag {
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+
+  em {
+    @include serif(20, 30);
+    font-style: italic;
+    color: c(sage);
+  }
+
+  span {
+    @include kr(11, 12);
+  }
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 16px;
+    border-top: 1px solid c(cream);
+  }
+
+  @include down($bp-md) {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+
+    li {
+      border-top-color: rgba(247, 244, 238, 0.18);
+      padding-block: 14px;
+    }
+  }
+}
+
+.value {
+  @include serif(32, 48);
+}
+
+.factLabel {
+  @include kr(12, 13);
+}
+
+// ---------- motion: 막대가 채워지며 마커가 제자리까지 미끄러져요 ----------
+:global(.motion-ready) .scale {
+  .fill {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  }
+
+  .marker {
+    left: 0;
+    opacity: 0;
+    transition:
+      left 2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
+      opacity 0.6s ease 0.2s;
+  }
+
+  &:global(.is-in) {
+    .fill {
+      transform: none;
+    }
+
+    .marker {
+      left: calc(var(--pos) * 100%);
+      opacity: 1;
+    }
+  }
+}

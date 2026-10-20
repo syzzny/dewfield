@@ -1,0 +1,297 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.top {
+  @include container;
+  display: flex;
+  gap: 80px;
+  padding-bottom: fl(56, 140);
+
+  @include down($bp-md) {
+    flex-direction: column;
+    gap: 0;
+    padding-inline: 0;
+  }
+}
+
+// ---------- gallery ----------
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 52.8%;
+  flex: none;
+
+  @include up($bp-md) {
+    position: sticky;
+    top: 96px;
+    align-self: flex-start;
+  }
+
+  @include down($bp-md) {
+    width: 100%;
+    gap: 0;
+  }
+}
+
+.main {
+  position: relative;
+  aspect-ratio: 760 / 950;
+
+  @include down($bp-md) {
+    aspect-ratio: 390 / 500;
+  }
+}
+
+.mainImg {
+  height: 100%;
+}
+
+.badge {
+  position: absolute;
+  top: fl(20, 24);
+  left: fl(20, 24);
+}
+
+.no {
+  position: absolute;
+  left: fl(16, 24);
+  bottom: fl(14, 24);
+  @include serif(110, 200, 0.8);
+  letter-spacing: -0.05em;
+  color: c(cream);
+}
+
+.counter {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.pager {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  display: flex;
+  gap: 5px;
+
+  i {
+    width: 7px;
+    height: 2px;
+    background: c(ink, 0.3);
+    transition:
+      width 0.3s $ease,
+      background 0.3s;
+  }
+
+  .on {
+    width: 22px;
+    background: c(ink);
+  }
+
+  @include up($bp-md) {
+    display: none;
+  }
+}
+
+.thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+
+  @include down($bp-md) {
+    display: flex;
+    gap: 8px;
+    padding: 10px 20px 0;
+    overflow-x: auto;
+  }
+}
+
+.thumb {
+  position: relative;
+  aspect-ratio: 181 / 226;
+  outline: 1.5px solid transparent;
+  outline-offset: -1.5px;
+  transition: opacity 0.3s;
+
+  > span {
+    height: 100%;
+  }
+
+  @include up($bp-md) {
+    // 데스크톱 썸네일은 대표 이미지 외 4장
+    &.firstThumb {
+      display: none;
+    }
+  }
+
+  @include down($bp-md) {
+    flex: 0 0 66px;
+    height: 82px;
+    opacity: 0.7;
+  }
+}
+
+.thumbOn {
+  outline-color: c(ink);
+  opacity: 1;
+}
+
+// ---------- purchase panel ----------
+.panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: fl(28, 40);
+  min-width: 0;
+  padding-top: 16px;
+
+  @include down($bp-md) {
+    padding: 32px 20px 0;
+  }
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: fl(12, 18);
+}
+
+.name {
+  @include serif(56, 88, 0.9);
+  letter-spacing: -0.03em;
+  @include accent;
+}
+
+.korean {
+  @include kr(18, 20, 400);
+}
+
+.desc {
+  max-width: 460px;
+  @include kr(14, 15, 300, 1.8);
+  color: c(ink-soft);
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  @include kr(12, 13);
+  color: c(ink-soft);
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.now {
+  @include price-display(34, 40);
+}
+
+.was {
+  @include price(13, 15);
+  color: c(ink-soft);
+}
+
+.options {
+  border: 0;
+  border-bottom: 1px solid c(ink, $line-opacity);
+}
+
+.optionsHead {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  @include kr(13, 13, 400);
+
+  legend {
+    float: left;
+  }
+}
+
+.guide {
+  @include label;
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-block: fl(15, 18);
+  @include hairline;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover .radio {
+    border-color: c(ink);
+  }
+}
+
+.radio {
+  width: 12px;
+  height: 12px;
+  flex: none;
+  border: 1px solid c(ink, 0.35);
+  border-radius: 50%;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.optionOn .radio {
+  background: c(olive-dark);
+  border-color: c(olive-dark);
+}
+
+.option input:focus-visible + .radio {
+  outline: 1px solid c(olive);
+  outline-offset: 3px;
+}
+
+.optionLabel {
+  flex: 1;
+  font-family: $font-sans;
+  font-size: fl(14, 15);
+  white-space: pre;
+}
+
+.optionPrice {
+  @include price(13, 14);
+  color: c(ink-soft);
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notice {
+  padding-top: 6px;
+  @include kr(12);
+  color: c(ink-soft);
+  white-space: pre-wrap;
+}
+
+.desktopOnly {
+  @include down($bp-md) {
+    display: none;
+  }
+}

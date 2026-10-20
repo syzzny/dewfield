@@ -1,0 +1,54 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: fl(12, 16);
+
+  // 위쪽 hairline — 스크롤하면 왼쪽에서 그어져요 (styles/_motion.scss 'line')
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: c(ink, $line-strong-opacity);
+  }
+}
+
+.strong::before {
+  background: c(ink);
+}
+
+.dark {
+  color: c(cream);
+
+  &::before {
+    background: c(cream, $line-strong-opacity);
+  }
+
+  &.strong::before {
+    background: c(cream);
+  }
+}
+
+.right {
+  text-align: right;
+}
+
+.showMobile {
+  display: none;
+}
+
+@include down($bp-md) {
+  .hideMobile {
+    display: none;
+  }
+  .showMobile {
+    display: inline;
+  }
+}
