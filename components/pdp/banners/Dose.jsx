@@ -8,7 +8,7 @@ export default function Dose({ label, number, title, italic, body, fact, image }
   const count = Number(number) || 3;
   return (
     <section className={styles.banner}>
-      <Img src={image} sat={-0.15} className={styles.img} />
+      <Img src={image} sat={-0.15} className={styles.img} sizes="(max-width: 900px) 100vw, 50vw" />
       <Label tone="cream" className={styles.label}>
         {label}
       </Label>

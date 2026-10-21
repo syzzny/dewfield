@@ -33,7 +33,7 @@ function Orders() {
           <li key={o.no}>
             <span className={styles.stack}>
               {o.items.map((slug) => (
-                <Img key={slug} src={getProduct(slug).image} className={styles.stackImg} reveal={false} />
+                <Img key={slug} src={getProduct(slug).image} className={styles.stackImg} reveal={false} sizes="120px" />
               ))}
             </span>
             <span className={styles.orderInfo}>
@@ -112,7 +112,7 @@ export default function MyPage() {
 
   return (
     <>
-      <header className={styles.header}>
+      <header className={styles.header} data-intro>
         <IndexRow
           left="(Account)  Orders · Profile · Benefits"
           right={`Level — ${member.level}`}

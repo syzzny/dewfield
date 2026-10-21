@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { searchProducts, getProduct } from '@/data/products';
 import { searchStories } from '@/data/journal';
 import { cx } from '@/lib/format';
@@ -18,10 +18,9 @@ import styles from './SearchView.module.scss';
 const RELATED = ['병풀', '붉은기', '민감성', '토너 팩'];
 const SUGGEST = ['녹차', '칙칙한 톤', '수분'];
 
-export default function SearchView() {
+/** 검색어(q)는 서버(page.js)가 주소에서 읽어 넘겨줘요 — 결과가 처음부터 서버에서 그려져요 */
+export default function SearchView({ q = '' }) {
   const router = useRouter();
-  const params = useSearchParams();
-  const q = params.get('q') ?? '';
   const [value, setValue] = useState(q);
   const [tab, setTab] = useState('all');
   const input = useRef(null);
@@ -115,7 +114,7 @@ export default function SearchView() {
             <IndexRow left={`Journal (${stories.length})`} strong />
             {stories.map((s) => (
               <Link key={s.slug} href={`/journal/${s.slug}`} className={styles.story}>
-                <Img src={s.image} className={styles.storyImg} reveal={false} />
+                <Img src={s.image} className={styles.storyImg} reveal={false} sizes="200px" />
                 <span className={styles.storyText}>
                   <span className={styles.storyTitle}>{s.title.replace(/\n/g, ' ')}</span>
                   <span className={styles.storyKo}>{s.korean}</span>

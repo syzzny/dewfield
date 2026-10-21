@@ -27,7 +27,14 @@ export default function TextureIngredients({
       <SectionHead title={title} italic={italic} body={body} size="l" />
       <div className={styles.body}>
         <div className={styles.swatch}>
-          <Img src={image} sat={0} blend="multiply" className={styles.img} reveal="fade" />
+          <Img
+            src={image}
+            sat={0}
+            blend="multiply"
+            className={styles.img}
+            reveal="fade"
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
           <svg className={styles.lines} viewBox="0 0 660 660" aria-hidden data-reveal="scene">
             <polyline points="370,290 370,150 580,150" pathLength={1} />
             <circle cx="370" cy="290" r="3.5" />

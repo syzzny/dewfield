@@ -20,7 +20,8 @@
 }
 
 // 로딩이 끝나면 부드럽게 나타나요 (JS가 준비된 경우에만 숨김)
-:global(.motion-ready) .frame img {
+// 첫 화면 이미지(data-eager)는 기다리지 않아요 — _motion.scss의 인트로 애니메이션으로 나타나요.
+:global(.motion-ready) .frame:not([data-eager]) img {
   opacity: 0;
   transition: opacity 0.9s ease;
 }

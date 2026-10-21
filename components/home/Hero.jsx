@@ -12,7 +12,7 @@ export default function Hero() {
   const toner = getProduct('cica-calming-toner');
 
   return (
-    <section className={styles.hero}>
+    <section className={styles.hero} data-intro>
       <Img src={images.hills} sat={-0.35} className={styles.bg} eager parallax={0.12} />
       <span className={styles.shade} />
 
@@ -67,7 +67,7 @@ export default function Hero() {
         data-reveal-delay="850"
         data-reveal-stagger="off"
       >
-        <Img src={toner.image} className={styles.cardImg} />
+        <Img src={toner.image} className={styles.cardImg} sizes="240px" eager />
         <span className={styles.cardRow}>
           <Label>No. {toner.no}</Label>
           <Label>{toner.size}</Label>

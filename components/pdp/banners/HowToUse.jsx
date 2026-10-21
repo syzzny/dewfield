@@ -14,7 +14,13 @@ export default function HowToUse({ product, order, total, index, title, imageCap
       />
       <div className={styles.body}>
         <div className={styles.visual}>
-          <Img src={image} sat={-0.25} position="65% 50%" className={styles.img} />
+          <Img
+            src={image}
+            sat={-0.25}
+            position="65% 50%"
+            className={styles.img}
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
           <p className={styles.caption}>{imageCaption}</p>
         </div>
         <div className={styles.steps}>

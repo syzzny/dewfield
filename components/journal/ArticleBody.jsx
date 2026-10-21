@@ -16,7 +16,7 @@ function ProductMention({ slug }) {
   return (
     <aside className={styles.mention}>
       <Link href={`/shop/${p.slug}`} className={styles.mentionImg}>
-        <Img src={p.image} alt={p.name} reveal={false} />
+        <Img src={p.image} alt={p.name} reveal={false} sizes="200px" />
       </Link>
       <div className={styles.mentionText}>
         <Label tone="olive">In this story</Label>
@@ -63,7 +63,7 @@ export default function ArticleBody({ blocks }) {
               <figure key={i} className={styles.figure}>
                 <div className={styles.images}>
                   {b.items.map((src) => (
-                    <Img key={src} src={src} className={styles.inlineImg} />
+                    <Img key={src} src={src} className={styles.inlineImg} sizes="(max-width: 900px) 100vw, 50vw" />
                   ))}
                 </div>
                 {b.caption && <figcaption>{b.caption}</figcaption>}

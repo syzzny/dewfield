@@ -24,7 +24,7 @@ const TOTAL = questions.length;
 function QuizHeader({ onBack }) {
   const router = useRouter();
   return (
-    <header className={styles.header}>
+    <header className={styles.header} data-intro>
       <div className={styles.headLeft}>
         {onBack && (
           <button type="button" onClick={onBack}>
@@ -48,7 +48,14 @@ function QuizHeader({ onBack }) {
 function Intro({ onStart }) {
   return (
     <div className={styles.intro}>
-      <Img src={quizIntro.image} sat={-0.25} className={styles.introImg} eager reveal="fade" />
+      <Img
+        src={quizIntro.image}
+        sat={-0.25}
+        className={styles.introImg}
+        eager
+        reveal="fade"
+        sizes="(max-width: 900px) 100vw, 50vw"
+      />
       <div className={styles.introCopy}>
         <Label>(Skin finder) {TOTAL} questions · 1 min</Label>
         <Rich as="h1" text={quizIntro.title} italic={quizIntro.italic} className={styles.introTitle} />
@@ -189,7 +196,7 @@ function ImageSelect({ q, value, onChange }) {
           onClick={() => onChange(o.id)}
         >
           <span className={styles.textureMedia}>
-            <Img src={o.image} sat={-0.2} reveal={false} />
+            <Img src={o.image} sat={-0.2} reveal={false} sizes="240px" />
             {value === o.id && <span className={styles.check}>✓</span>}
           </span>
           <span className={styles.textureTitle}>{o.title}</span>
@@ -270,7 +277,13 @@ function Result({ answers, onRetake }) {
           </ul>
         </div>
         <div className={styles.resultVisual}>
-          <Img src={images.leaf} sat={-0.3} className={styles.resultImg} reveal="fade" />
+          <Img
+            src={images.leaf}
+            sat={-0.3}
+            className={styles.resultImg}
+            reveal="fade"
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
           <div className={styles.metricsCard}>
             <ProfileMetrics metrics={profile.metrics} />
           </div>

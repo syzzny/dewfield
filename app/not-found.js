@@ -8,7 +8,7 @@ import styles from './not-found.module.scss';
 
 export default function NotFound() {
   return (
-    <section className={styles.page}>
+    <section className={styles.page} data-intro>
       <NavOverlay />
       <Img src={images.hills} sat={-0.35} className={styles.bg} eager parallax={0.1} />
       <span className={styles.shade} />

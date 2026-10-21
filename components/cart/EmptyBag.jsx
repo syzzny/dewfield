@@ -35,7 +35,7 @@ export default function EmptyBag() {
           <div className={styles.recentList}>
             {RECENT.map(getProduct).map((p) => (
               <Link key={p.slug} href={`/shop/${p.slug}`} className={styles.recentItem}>
-                <Img src={p.image} className={styles.recentImg} reveal={false} />
+                <Img src={p.image} className={styles.recentImg} reveal={false} sizes="200px" />
                 {p.shortName}
               </Link>
             ))}
@@ -43,7 +43,13 @@ export default function EmptyBag() {
         </div>
       </div>
       <div className={styles.visual}>
-        <Img src={images.stones} sat={-0.3} className={styles.img} reveal="fade" />
+        <Img
+          src={images.stones}
+          sat={-0.3}
+          className={styles.img}
+          reveal="fade"
+          sizes="(max-width: 900px) 100vw, 50vw"
+        />
       </div>
     </section>
   );

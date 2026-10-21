@@ -111,7 +111,7 @@ export default function CheckoutView() {
 
   return (
     <form onSubmit={submit} noValidate>
-      <header className={styles.header}>
+      <header className={styles.header} data-intro>
         <ol className={styles.steps}>
           {STEPS.map((s, i) => (
             <li key={s} className={cx(i === 1 && styles.current)}>
@@ -208,7 +208,7 @@ export default function CheckoutView() {
           <ul className={styles.lines}>
             {lines.map((l) => (
               <li key={`${l.slug}-${l.option}`}>
-                <Img src={l.product.image} className={styles.lineImg} reveal={false} />
+                <Img src={l.product.image} className={styles.lineImg} reveal={false} sizes="120px" />
                 <span className={styles.lineName}>
                   {l.product.name} · {l.optionInfo.label}
                   {l.qty > 1 && ` × ${l.qty}`}

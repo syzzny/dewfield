@@ -12,7 +12,7 @@ export default function StoryCard({ story, variant = 'grid', className }) {
   const title = story.title.replace(/\n/g, ' ');
   return (
     <Link href={`/journal/${story.slug}`} className={cx(styles.card, styles[variant], className)} data-reveal="up">
-      <Img src={story.image} sat={-0.2} className={styles.img} />
+      <Img src={story.image} sat={-0.2} className={styles.img} sizes="(max-width: 900px) 80vw, 33vw" />
       {variant === 'home' ? (
         <>
           <Label className={styles.small}>Journal</Label>

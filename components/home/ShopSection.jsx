@@ -55,7 +55,7 @@ export default function ShopSection() {
         {feature && (
           <article className={styles.feature}>
             <Link href={`/shop/${feature.slug}`} className={styles.featureMedia}>
-              <Img src={feature.image} className={styles.featureImg} />
+              <Img src={feature.image} className={styles.featureImg} sizes="(max-width: 900px) 100vw, 50vw" />
               <Label className={styles.featureTag}>
                 {feature.badge} — No. {feature.no}
               </Label>

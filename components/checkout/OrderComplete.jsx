@@ -36,8 +36,15 @@ export default function OrderComplete() {
   ];
 
   return (
-    <section className={styles.wrap}>
-      <Img src={images.gift} sat={-0.12} className={styles.img} eager reveal="fade" />
+    <section className={styles.wrap} data-intro>
+      <Img
+        src={images.gift}
+        sat={-0.12}
+        className={styles.img}
+        eager
+        reveal="fade"
+        sizes="(max-width: 900px) 100vw, 50vw"
+      />
       <div className={styles.content}>
         <IndexRow left={`(Order)  No. ${o.no}`} right="Step 03 / 03" mobileRight="03 / 03" strong />
         <Rich as="h1" text={'Thank you,\nquietly.'} italic="quietly." className={styles.title} />

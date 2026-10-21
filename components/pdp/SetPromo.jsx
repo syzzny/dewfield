@@ -36,7 +36,7 @@ export default function SetPromo() {
     <section className={styles.section}>
       <div className={styles.card}>
         <div className={styles.media}>
-          <Img src={images.gift} sat={-0.12} className={styles.img} />
+          <Img src={images.gift} sat={-0.12} className={styles.img} sizes="(max-width: 900px) 100vw, 50vw" />
           <span className={styles.fade} />
           {t && (
             <span className={styles.timer} aria-label="프로모션 남은 시간">

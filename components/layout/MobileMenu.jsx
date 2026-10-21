@@ -75,7 +75,7 @@ export default function MobileMenu({ open, onClose, count }) {
 
       <div className={styles.bottom}>
         <Link href="/skin-finder" className={styles.finder}>
-          <Img src={images.leaf} sat={-0.25} className={styles.thumb} reveal={false} />
+          <Img src={images.leaf} sat={-0.25} className={styles.thumb} reveal={false} sizes="160px" />
           <span className={styles.finderText}>
             <span className={styles.finderLabel}>Skin finder · 1 min</span>내 피부에 맞는 루틴 찾기
           </span>

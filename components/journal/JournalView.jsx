@@ -20,7 +20,7 @@ export default function JournalView() {
 
   return (
     <>
-      <header className={styles.header}>
+      <header className={styles.header} data-intro>
         <IndexRow left="(Journal)  Slow notes" right="Vol. 03 — Autumn 2026" mobileRight="Vol. 03" strong />
         <Rich as="h1" text="Slow notes on skin." italic="on skin." className={styles.title} />
         <div className={styles.tabs} role="tablist">
@@ -42,7 +42,7 @@ export default function JournalView() {
       {showFeatured && (
         <article className={styles.featured}>
           <Link href={`/journal/${featuredStory.slug}`} className={styles.featuredMedia}>
-            <Img src={featuredStory.image} className={styles.featuredImg} />
+            <Img src={featuredStory.image} className={styles.featuredImg} sizes="(max-width: 900px) 100vw, 60vw" />
           </Link>
           <div className={styles.featuredText}>
             <Label tone="olive">

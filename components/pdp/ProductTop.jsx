@@ -52,10 +52,17 @@ export default function ProductTop({ product }) {
   ];
 
   return (
-    <section className={styles.top}>
+    <section className={styles.top} data-intro>
       <div className={styles.gallery}>
         <div className={styles.main}>
-          <Img src={product.gallery[active]} alt={product.name} className={styles.mainImg} eager reveal="fade" />
+          <Img
+            src={product.gallery[active]}
+            alt={product.name}
+            className={styles.mainImg}
+            eager
+            reveal="fade"
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
           <Label className={styles.badge}>{product.badge}</Label>
           <span className={styles.no}>{product.no}</span>
           <Label className={styles.counter}>
@@ -76,7 +83,7 @@ export default function ProductTop({ product }) {
               onClick={() => setActive(i === active ? 0 : i)}
               aria-label={`${i + 1}번째 이미지 보기`}
             >
-              <Img src={src} sat={-0.2} reveal={false} />
+              <Img src={src} sat={-0.2} reveal={false} sizes="120px" />
             </button>
           ))}
         </div>

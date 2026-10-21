@@ -16,7 +16,7 @@ export default function Results({ product, order, total, index, title, italic, i
         />
         <Rich as="h2" text={title} italic={italic} className={styles.title} />
       </div>
-      <Img src={image} sat={0} className={styles.img} />
+      <Img src={image} sat={0} className={styles.img} sizes="(max-width: 900px) 100vw, 50vw" />
       <ul className={styles.stats}>
         {stats.map((s) => (
           <li key={s.value} data-reveal="up">

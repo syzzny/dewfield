@@ -37,7 +37,7 @@ export default function CartView() {
 
   return (
     <>
-      <header className={styles.header}>
+      <header className={styles.header} data-intro>
         <IndexRow left="(Bag)  Your selection" right="Step 01 / 03" mobileRight={`${count} items`} strong />
         <Rich as="h1" text={`Your bag (${count})`} italic={`(${count})`} className={styles.title} />
       </header>
@@ -62,7 +62,7 @@ export default function CartView() {
             {lines.map((l) => (
               <li key={`${l.slug}-${l.option}`} className={styles.item}>
                 <Link href={`/shop/${l.slug}`} className={styles.thumb}>
-                  <Img src={l.product.image} alt={l.product.name} reveal={false} />
+                  <Img src={l.product.image} alt={l.product.name} reveal={false} sizes="160px" />
                 </Link>
                 <div className={styles.info}>
                   <div className={styles.nameRow}>

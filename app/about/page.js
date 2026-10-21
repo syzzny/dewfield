@@ -45,7 +45,7 @@ export default function AboutPage() {
     <>
       <NavOverlay />
 
-      <section className={styles.hero}>
+      <section className={styles.hero} data-intro>
         <Img src={images.centellaField} sat={-0.25} className={styles.heroImg} eager parallax={0.12} />
         <span className={styles.heroShade} />
         <span className={styles.heroLines} aria-hidden>
@@ -84,7 +84,7 @@ export default function AboutPage() {
             </p>
           </div>
           <figure className={styles.figure}>
-            <Img src={images.portrait} className={styles.figImg} />
+            <Img src={images.portrait} className={styles.figImg} sizes="(max-width: 900px) 100vw, 50vw" />
             <figcaption>
               <Label>Fig. 01</Label>
               <em>Founder’s morning ritual</em>

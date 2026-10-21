@@ -103,3 +103,25 @@ em {
 .pre-line {
   white-space: pre-line;
 }
+
+// 본문 바로가기 — 평소엔 화면 밖, 키보드 포커스를 받으면 왼쪽 위에 나타나요
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  padding: 12px 18px;
+  background: c(ink);
+  color: c(cream);
+  @include kr(14, 14, 500);
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+
+  &:focus-visible {
+    transform: none;
+  }
+}
+
+main:focus {
+  outline: none;
+}

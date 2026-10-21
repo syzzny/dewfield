@@ -24,7 +24,7 @@ export default function Ingredients({ index = '(04)  Ingredients', count = '04 /
         <ul className={styles.columns}>
           {ingredients.map((item) => (
             <li key={item.id} className={styles.col} data-reveal="up">
-              <Img src={item.image} sat={-0.25} className={styles.img} />
+              <Img src={item.image} sat={-0.25} className={styles.img} sizes="(max-width: 900px) 50vw, 25vw" />
               <div className={styles.meta}>
                 <div className={styles.valueRow}>
                   <CountUp value={item.value} className={styles.value} />

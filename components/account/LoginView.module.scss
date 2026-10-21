@@ -43,15 +43,6 @@
   left: fl(20, 48);
 }
 
-.welcome {
-  position: absolute;
-  left: fl(20, 48);
-  bottom: fl(24, 48);
-  @include serif(44, 96, 0.9);
-  letter-spacing: -0.03em;
-  @include accent(sage);
-}
-
 .form {
   display: flex;
   flex-direction: column;

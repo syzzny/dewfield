@@ -177,3 +177,123 @@ $motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
     transform: none !important;
   }
 }
+
+// =============================================================
+// intro: 첫 화면(히어로 · 페이지 머리) 전용 — 스크립트를 기다리지 않는 CSS 애니메이션
+// 스크롤 리빌은 JS(MotionRoot)가 준비돼야 시작해서, 느린 폰에서는 첫 화면이 몇 초 비어 보였어요(LCP).
+// 첫 화면 요소는 HTML이 그려지는 즉시 같은 움직임으로 나타나게 해요.
+//   - 컨테이너에 data-intro 를 붙이면 그 안의 data-reveal 요소들이 모두 인트로로 바뀌어요.
+//   - Img의 eager 이미지는 스스로 data-intro="fade" 를 가져요.
+// =============================================================
+
+// 지연값을 HTML 속성에서 바로 읽어요 (JS가 --reveal-delay를 넣기 전에도 동작)
+@each $ms in (100, 200, 320, 400, 500, 650, 850) {
+  [data-reveal-delay='#{$ms}'] {
+    --reveal-delay: #{$ms}ms;
+  }
+}
+
+@keyframes intro-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes intro-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.18em, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes intro-line {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.32em, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes intro-hairline {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.motion-ready {
+  [data-intro][data-reveal='fade'],
+  [data-intro] [data-reveal='fade'],
+  [data-intro='fade']:not([data-reveal]) {
+    animation: intro-fade $slow $motion-ease var(--reveal-delay) both;
+  }
+
+  [data-intro] [data-reveal='up'],
+  [data-intro][data-reveal='up'] {
+    animation: intro-up $dur $motion-ease var(--reveal-delay) both;
+  }
+
+  [data-intro] [data-reveal='rise'] {
+    animation: intro-rise 1.8s $motion-ease var(--reveal-delay) both;
+  }
+
+  [data-intro] [data-reveal='lines'] .reveal-line {
+    animation: intro-line $slow $motion-ease both;
+    animation-delay: calc(var(--reveal-delay) + var(--line, 0) * 110ms);
+  }
+
+  [data-intro] [data-reveal='line'] {
+    &::before {
+      animation: intro-hairline $slow $motion-ease var(--reveal-delay) both;
+      transform-origin: left;
+    }
+
+    > * {
+      animation: intro-fade $dur $motion-ease calc(var(--reveal-delay) + 300ms) both;
+    }
+  }
+
+  // 인트로 안의 스크롤 이미지(eager가 아닌 것)는 커튼 대신 페이드로
+  [data-intro] [data-reveal='image'] {
+    animation: intro-fade $slow $motion-ease var(--reveal-delay) both;
+
+    &::after {
+      display: none;
+    }
+
+    img {
+      transform: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready [data-intro],
+  .motion-ready [data-intro] *,
+  .motion-ready [data-intro] *::before {
+    animation: none !important;
+  }
+}

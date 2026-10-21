@@ -12,7 +12,7 @@ export default function Proof() {
   const toner = getProduct('cica-calming-toner');
   return (
     <section className={styles.section}>
-      <Img src={images.portrait} sat={-0.25} className={styles.img} />
+      <Img src={images.portrait} sat={-0.25} className={styles.img} sizes="(max-width: 900px) 100vw, 50vw" />
       <div className={styles.content}>
         <IndexRow left="(06)  Proof" right="Dewfield — 06 / 07" mobileRight="06 / 07" />
         <p className={styles.big}>

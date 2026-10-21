@@ -12,7 +12,7 @@ export default function Orbit({ label, title, italic, image, states }) {
       <Rich as="h2" text={title} italic={italic} className={styles.title} />
       <div className={styles.orbit} data-reveal="scene">
         <span className={styles.ring} aria-hidden />
-        <Img src={image} sat={-0.15} className={styles.circle} reveal="fade" />
+        <Img src={image} sat={-0.15} className={styles.circle} reveal="fade" sizes="(max-width: 900px) 60vw, 480px" />
         {states.map((s, i) => (
           <div key={s.en} className={styles.state} data-i={i} style={{ '--d': `${0.6 + i * 0.18}s` }}>
             <span className={styles.dot} />

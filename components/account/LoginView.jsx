@@ -32,14 +32,20 @@ export default function LoginView() {
   };
 
   return (
-    <section className={styles.wrap}>
+    <section className={styles.wrap} data-intro>
       <div className={styles.visual}>
-        <Img src={images.leaf} sat={-0.25} className={styles.img} eager parallax={0.06} />
+        <Img
+          src={images.leaf}
+          sat={-0.25}
+          className={styles.img}
+          eager
+          parallax={0.06}
+          sizes="(max-width: 900px) 100vw, 50vw"
+        />
         <span className={styles.shade} />
         <Label tone="cream" className={styles.label}>
           (Members) Dewfield club
         </Label>
-        <Rich as="p" text={'Welcome\nback to calm.'} italic="back to calm." className={styles.welcome} />
       </div>
 
       <form className={styles.form} onSubmit={submit} noValidate>

@@ -26,7 +26,7 @@ export default function ArticlePage({ params }) {
 
   return (
     <article>
-      <header className={styles.header}>
+      <header className={styles.header} data-intro>
         <IndexRow
           left={`(Journal)  ${story.category}`}
           right={`${story.readTime} — ${story.date}`}

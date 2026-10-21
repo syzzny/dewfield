@@ -20,7 +20,7 @@ export default function Staircase({ label, title, italic, body, steps }) {
               <span className={styles.no}>{pad(i + 1)}</span>
               <span className={styles.en}>{s.en}</span>
             </span>
-            <Img src={s.image} className={styles.img} />
+            <Img src={s.image} className={styles.img} sizes="(max-width: 900px) 25vw, 20vw" />
             <span className={styles.text}>{s.text}</span>
           </li>
         ))}

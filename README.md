@@ -17,7 +17,8 @@ Node.js 18.17 이상이 필요해요. GitHub에 올린 뒤 Vercel에 연결하�
 
 - **Next.js 14 (App Router) + React 18 + JavaScript**
 - **SCSS Module**: 컴포넌트마다 스타일 파일을 하나씩 두고, 공통 토큰과 믹스인은 `styles/`에서 불러와요.
-- **@fontsource**: Instrument Serif · Instrument Sans · Noto Sans KR을 프로젝트 안에서 직접 제공해요.
+- **폰트**: 영문 Instrument Serif · Sans는 `next/font/local`(app/fonts)로 미리 내려받고, 한글 Noto Sans KR은 @fontsource 분할 파일로 제공해요.
+- **next/image**: 화면 폭에 맞는 크기의 WebP를 자동으로 골라 받아요 (변환에 `sharp` 사용).
 - 외부 상태 관리 라이브러리 없이 **Context + localStorage**로 장바구니를 관리해요.
 
 ## 폴더 구조
@@ -67,6 +68,8 @@ public/images/        이미지 (Figma "Dev export — Images" 프레임에서 �
 
 **이미지**
 - `data/images.js`에서 경로를 관리해요.
+- `<Img>`에 `sizes`(화면에서 차지하는 폭)를 적어 주면 그 크기에 맞는 파일만 받아요.
+- 첫 화면에 보이는 이미지는 `eager`를 붙여요 — 먼저 받고, 스크립트를 기다리지 않고 바로 나타나요.
 - 같은 파일명으로 덮어쓰면 교체돼요.
 - 이미지가 없으면 베이지 블록으로 자리만 남아요.
 

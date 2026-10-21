@@ -33,7 +33,7 @@ export default function Philosophy() {
           </ul>
         </div>
         <figure className={styles.figure}>
-          <Img src={images.leaf} sat={-0.25} className={styles.img} />
+          <Img src={images.leaf} sat={-0.25} className={styles.img} sizes="(max-width: 900px) 100vw, 50vw" />
           <figcaption>
             <Label>Fig. 01</Label>
             <em>Centella, morning light</em>
